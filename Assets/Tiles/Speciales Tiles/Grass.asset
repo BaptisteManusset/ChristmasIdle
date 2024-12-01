@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c779848d9dd029409ca676b49e10a18, type: 3}
+  m_Name: Grass
+  m_EditorClassIdentifier: 
+  m_Tile: {fileID: 11400000, guid: 1a701f763ad55d6439761c24cf76f102, type: 2}
+  m_Sprites:
+  - m_OriginalSprite: {fileID: 1369666063, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: -1568551627, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: 1922535204, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 2036800824, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: -632050699, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 740767393, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: -343521907, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 1244720132, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: -755528766, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 1114967095, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: -731319208, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 1627318469, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: 794923090, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: 2048190252, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - m_OriginalSprite: {fileID: 162724617, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+    m_OverrideSprite: {fileID: -466241149, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  m_GameObjects: []
+  m_InstanceTile: {fileID: 3151600005720760149}
+--- !u!114 &3151600005720760149
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013b4c2d8e61479cba83ed0954b11fde, type: 3}
+  m_Name: Snow (Override)
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 0}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
+  m_siblingGroup: 0
