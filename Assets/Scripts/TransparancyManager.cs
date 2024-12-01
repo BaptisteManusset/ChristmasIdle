@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 
-public class TransparancyManager : MonoBehaviour
+public class TransparancyManasger : MonoBehaviour
 {
-#if !UNITY_EDITOR
+ #if !UNITY_EDITOR
     [DllImport("user32.dll")]
     static extern IntPtr GetActiveWindow();
 
