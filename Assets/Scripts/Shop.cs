@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
     [SerializeField] private Button m_toggle;
-    private bool toggle;
+    [SerializeField] private GameObject m_library;
+    [SerializeField] private GameObject m_background;
 
-    private float width;
+
+    public static bool IsOpen;
 
     void Start()
     {
         m_toggle.onClick.AddListener(Call);
-
-        width = ((RectTransform)transform).rect.width;
-
         Close();
     }
 
     private void Call()
     {
-        if (toggle)
+        if (IsOpen)
         {
             Close();
         }
@@ -33,18 +30,15 @@ public class Shop : MonoBehaviour
 
     private void Open()
     {
-        Vector3 pos = transform.position;
-        pos.x = 0;
-        transform.position = pos;
-        toggle = true;
+        IsOpen = true;
+        m_background.gameObject.SetActive(true);
+        m_library.gameObject.SetActive(true);
     }
 
     private void Close()
     {
-        Vector3 pos = transform.position;
-        pos.x = -width;
-        transform.position = pos;
-        toggle = false;
-
+        IsOpen = false;
+        m_background.gameObject.SetActive(false);
+        m_library.gameObject.SetActive(false);
     }
 }

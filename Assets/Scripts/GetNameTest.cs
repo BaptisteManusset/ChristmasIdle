@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ public class GetNameTest : MonoBehaviour
 
     private void Awake()
     {
-        label.text = System.AppDomain.CurrentDomain.FriendlyName + "\n" +
-                     System.Diagnostics.Process.GetCurrentProcess().ProcessName;
+#if UNITY_EDITOR
+        label.text = AppDomain.CurrentDomain.FriendlyName + "\n" +
+                     Process.GetCurrentProcess().ProcessName;
+#endif
     }
 }
