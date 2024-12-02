@@ -45,7 +45,8 @@ public class TilemapEditor : MonoBehaviour
 
     private void RightClickPerformed(InputAction.CallbackContext a_obj)
     {
-        TileBase pickerTile = Shop.IsOpen ? shopTilemap.GetTile(GetPosition()) : tileMap.GetTile(GetPosition());
+        TileBase pickerTile =
+            Shop.IsOpen ? shopTilemap.GetTile(grid.GetMousePosition()) : tileMap.GetTile(grid.GetMousePosition());
 
         if (pickerTile == null) return;
         currentTile = pickerTile;
@@ -59,21 +60,12 @@ public class TilemapEditor : MonoBehaviour
 
     public void Update()
     {
-        if (leftClick.IsPressed())
-        {
-            GetPosition();
-            tileMap.SetTile(GetPosition(), currentTile);
-        }
+        // if (leftClick.IsPressed())
+        // {
+        //     grid.GetMousePosition();
+        //     tileMap.SetTile(grid.GetMousePosition(), currentTile);
+        // }
 
-        Placement.transform.position = GetPosition();
-    }
-
-    private Vector3Int GetPosition()
-    {
-        // save the camera as public field if you using not the main camera
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        // get the collision point of the ray with the z = 0 plane
-        Vector3 worldPoint = ray.GetPoint(-ray.origin.z / ray.direction.z);
-        return grid.WorldToCell(worldPoint);
+        Placement.transform.position = grid.GetMousePosition();
     }
 }
