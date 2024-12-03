@@ -25,4 +25,14 @@ public abstract class Tool : MonoBehaviour
     public virtual void OnRightStarted()
     {
     }
+
+    public virtual void OnSelect()
+    {
+        
+    }
+
+    public virtual void OnDeselect()
+    {
+        
+    }
 }

@@ -1,11 +1,24 @@
-﻿public class Eraser : Placer
+﻿public class Eraser : Tool
 {
-    protected override void Update()
+    private bool m_isPressed;
+
+    public override void OnLeftStarted()
+    {
+        m_isPressed = true;
+    }
+
+    public override void OnLeftCanceled()
+    {
+        m_isPressed = false;
+    }
+
+    protected virtual void Update()
     {
         if (Utils.IsHoverUI()) return;
-        if (IsPressed)
+        if (m_isPressed)
         {
-            ToolsManager.Instance.tileMap.SetTile(ToolsManager.Instance.tileMap.layoutGrid.GetMousePosition(), null);
+            TilemapHandler.Instance.GetTilemap()
+                .SetTile(TilemapHandler.Instance.GetTilemap().layoutGrid.GetMousePosition(), null);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,19 +17,31 @@ public class ToolsManager : Singleton<ToolsManager>
 
     [SerializeField] private TileBase currentTile;
 
-    [SerializeField] private TMP_Text m_label;
-    public Tilemap tileMap;
+    [SerializeField] private TMP_Text m_currentTilemap;
+    [SerializeField] private TMP_Text m_currentTool;
+
 
     public void SetCurrentTilemap(TileBase a_tile)
     {
         currentTile = a_tile;
-        m_label.text = currentTile.GetType().Name;
+        m_currentTilemap.text = currentTile.GetType().Name;
     }
 
     public TileBase GetCurrentTilemap()
     {
         return currentTile;
     }
+
+    public void SetCurrentTool(Tool a_tool)
+    {
+        if (current) current.OnDeselect();
+        current = a_tool;
+        if (current) current.OnSelect();
+
+        m_currentTool.text = current.GetType().Name;
+    }
+
+    #region Awake
 
     protected override void Awake()
     {
@@ -46,13 +57,6 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.canceled += OnRightCanceled;
     }
 
-    public bool hoverUi;
-
-    private void Update()
-    {
-        hoverUi = Utils.IsHoverUI();
-    }
-
     private void OnDestroy()
     {
         LeftDown.started -= OnLeftStarted;
@@ -63,50 +67,46 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.canceled -= OnRightCanceled;
     }
 
-    public void SetCurrentTool(Tool a_tool)
-    {
-        current = a_tool;
-    }
+    #endregion
+
+
+    #region events
 
     private void OnLeftCanceled(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnLeftCanceled();
-        Debug.Log("OnLeftCanceled");
     }
 
     private void OnLeftPerformed(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnLeftPerformed();
-        Debug.Log("OnLeftPerformed");
     }
 
     private void OnLeftStarted(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnLeftStarted();
-        Debug.Log("OnLeftStarted");
     }
 
     private void OnRightCanceled(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnRightCanceled();
-        Debug.Log("OnRightCanceled");
     }
 
     private void OnRightPerformed(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnRightPerformed();
-        Debug.Log("OnRightPerformed");
     }
 
     private void OnRightStarted(InputAction.CallbackContext a_obj)
     {
         if (current == null) return;
         current.OnRightStarted();
-        Debug.Log("OnRightStarted");
     }
+
+    #endregion
 }

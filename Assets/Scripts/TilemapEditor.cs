@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public class TilemapEditor : MonoBehaviour
 {
@@ -13,15 +12,12 @@ public class TilemapEditor : MonoBehaviour
     private bool m_ismainNull;
     private Grid grid;
 
-    public GameObject Placement;
     public TileBase currentTile;
 
     public InputAction leftClick;
     public InputAction rightClick;
 
     public TMP_Text current;
-
-    public Button m_erase;
 
     private void Awake()
     {
@@ -33,15 +29,7 @@ public class TilemapEditor : MonoBehaviour
 
         rightClick.Enable();
         rightClick.performed += RightClickPerformed;
-
-        m_erase.onClick.AddListener(Erase);
     }
-
-    private void Erase()
-    {
-        currentTile = null;
-    }
-
 
     private void RightClickPerformed(InputAction.CallbackContext a_obj)
     {
@@ -55,17 +43,5 @@ public class TilemapEditor : MonoBehaviour
 
     private void LeftClickPerformed(InputAction.CallbackContext a_obj)
     {
-    }
-
-
-    public void Update()
-    {
-        // if (leftClick.IsPressed())
-        // {
-        //     grid.GetMousePosition();
-        //     tileMap.SetTile(grid.GetMousePosition(), currentTile);
-        // }
-
-        Placement.transform.position = grid.GetMousePosition();
     }
 }
