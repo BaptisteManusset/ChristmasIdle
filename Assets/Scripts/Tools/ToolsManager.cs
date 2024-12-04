@@ -11,8 +11,8 @@ public class ToolsManager : Singleton<ToolsManager>
     public Tool current;
 
 
-    [SerializeField] InputAction LeftDown = new();
-    [SerializeField] InputAction RightDown = new();
+    [SerializeField] private InputAction LeftDown = new();
+    [SerializeField] private InputAction RightDown = new();
 
 
     [SerializeField] private TileBase currentTile;
@@ -20,6 +20,10 @@ public class ToolsManager : Singleton<ToolsManager>
     [SerializeField] private TMP_Text m_currentTilemap;
     [SerializeField] private TMP_Text m_currentTool;
 
+
+    [SerializeField] private Picker m_picker;
+    [SerializeField] private Placer m_placer;
+    [SerializeField] private Eraser m_eraser;
 
     public void SetCurrentTilemap(TileBase a_tile)
     {
@@ -38,13 +42,21 @@ public class ToolsManager : Singleton<ToolsManager>
         current = a_tool;
         if (current) current.OnSelect();
 
-        m_currentTool.text = current.GetType().Name;
+        m_currentTool.text = current.name;
     }
+
+    public void SetEraser() => SetCurrentTool(m_eraser);
+    public void SetPlacer() => SetCurrentTool(m_placer);
+    public void SetPicker() => SetCurrentTool(m_picker);
+
 
     #region Awake
 
     protected override void Awake()
     {
+        m_eraser = GetComponent<Eraser>();
+        m_placer = GetComponent<Placer>();
+        m_picker = GetComponent<Picker>();
         base.Awake();
         m_tools.AddRange(GetComponents<Tool>());
 

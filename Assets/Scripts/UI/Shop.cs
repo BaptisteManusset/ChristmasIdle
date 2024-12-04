@@ -10,7 +10,7 @@ public class Shop : Singleton<Shop>
 
     public static bool IsOpen;
 
-    void Start()
+    private void Start()
     {
         m_toggle.onClick.AddListener(Call);
         Close();
@@ -30,6 +30,8 @@ public class Shop : Singleton<Shop>
 
     private void Open()
     {
+        ((GameStateController)GameStateController.Instance).GotoUI();
+        
         IsOpen = true;
         m_background.gameObject.SetActive(true);
         m_library.gameObject.SetActive(true);
@@ -37,6 +39,7 @@ public class Shop : Singleton<Shop>
 
     private void Close()
     {
+        ((GameStateController)GameStateController.Instance).GotoIngame();
         IsOpen = false;
         m_background.gameObject.SetActive(false);
         m_library.gameObject.SetActive(false);

@@ -2,17 +2,18 @@
 
 public abstract class StateController : Singleton<StateController>
 {
-    State m_currentState;
+    private GameState m_currentState;
 
-    public State Current => m_currentState;
+    public GameState Current => m_currentState;
 
     protected virtual void Update()
     {
         if (m_currentState) m_currentState.UpdateState();
     }
 
-    public void ChangeState(State a_newState)
+    public void ChangeState(GameState a_newState)
     {
+        Debug.Log("new state: " + a_newState.State);
         if (m_currentState) m_currentState.OnExit();
         m_currentState = a_newState;
         if (m_currentState) m_currentState.OnEnter();

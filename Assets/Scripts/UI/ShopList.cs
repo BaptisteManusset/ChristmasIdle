@@ -10,27 +10,27 @@ public class ShopList : MonoBehaviour
 
     
     [ContextMenu("Test")]
-    void Start()
+    private void Start()
     {
-        for (int i = 0; i < m_tiles.Count; i++)
-        {
-            if (m_tiles[i] is Tile tileData)
-            {
-                Debug.Log($"{m_tiles[i].name}  >  {tileData.sprite}");
-            }
-            else if (m_tiles[i] is RuleTile ruleTile)
-            {
-                Debug.Log($"{m_tiles[i].name}  >  {ruleTile.m_DefaultSprite}");
-            }
-            else if (m_tiles[i] is AnimatedTile animatedTile)
-            {
-                Debug.Log($"{m_tiles[i].name}  >  {animatedTile.m_AnimatedSprites.First()}");
-            }
-        }
+        // for (int i = 0; i < m_tiles.Count; i++)
+        // {
+        //     if (m_tiles[i] is Tile tileData)
+        //     {
+        //         Debug.Log($"{m_tiles[i].name}  >  {tileData.sprite}");
+        //     }
+        //     else if (m_tiles[i] is RuleTile ruleTile)
+        //     {
+        //         Debug.Log($"{m_tiles[i].name}  >  {ruleTile.m_DefaultSprite}");
+        //     }
+        //     else if (m_tiles[i] is AnimatedTile animatedTile)
+        //     {
+        //         Debug.Log($"{m_tiles[i].name}  >  {animatedTile.m_AnimatedSprites.First()}");
+        //     }
+        // }
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
     }
 }

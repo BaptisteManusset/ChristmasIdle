@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using static GameStateController;
 
-public class UiState : State
+public class UiState : GameState
 {
+    public override EGameState State => EGameState.Menu;
     public override void OnEnter()
     {
     }

@@ -27,7 +27,7 @@ public class TransparancyManasger : MonoBehaviour
     const int LWA_ALPHA = 0x2;
 #endif
 
-    void Start()
+    private void Start()
     {
 #if !UNITY_EDITOR
         IntPtr hwnd = GetActiveWindow();

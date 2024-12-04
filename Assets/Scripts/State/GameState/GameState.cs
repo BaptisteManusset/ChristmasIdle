@@ -1,6 +1,6 @@
-﻿public class IngameState : GameState
+﻿public class GameState : State
 {
-    public override EGameState State => EGameState.Ingame;
+    public virtual EGameState State => EGameState.None;
 
     public override void OnEnter()
     {

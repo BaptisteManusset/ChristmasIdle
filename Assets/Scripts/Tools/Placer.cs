@@ -34,13 +34,13 @@ public class Placer : Tool
 
     public override void OnSelect()
     {
-        Debug.Log("OnSelect");
+        base.OnSelect();
         m_placement.SetActive(true);
     }
 
     public override void OnDeselect()
     {
-        Debug.Log("OnDeselect");
+        base.OnDeselect();
         m_placement.SetActive(false);
     }
 }

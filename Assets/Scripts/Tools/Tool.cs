@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 
 public abstract class Tool : MonoBehaviour
@@ -28,11 +29,11 @@ public abstract class Tool : MonoBehaviour
 
     public virtual void OnSelect()
     {
-        
+        Debug.Log($"<b>{GetType().Name}:{MethodBase.GetCurrentMethod()?.Name}</b>", this);
     }
 
     public virtual void OnDeselect()
     {
-        
+        Debug.Log($"<b>{GetType().Name}:{MethodBase.GetCurrentMethod()?.Name}</b>", this);
     }
 }

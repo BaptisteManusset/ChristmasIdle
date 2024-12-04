@@ -10,4 +10,14 @@ public class GameStateController : StateController
     {
         ChangeState(m_ingame);
     }
+
+    public void GotoUI() => ChangeState(m_uiState);
+    public void GotoIngame() => ChangeState(m_ingame);
+}
+
+public enum EGameState
+{
+    Ingame,
+    Menu,
+    None
 }

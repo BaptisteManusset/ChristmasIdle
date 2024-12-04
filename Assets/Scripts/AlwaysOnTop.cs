@@ -14,7 +14,7 @@ public class AlwaysOnTop : MonoBehaviour {
 
     public static readonly System.IntPtr HWND_TOPMOST = new System.IntPtr(-1);
     public static readonly System.IntPtr HWND_NOT_TOPMOST = new System.IntPtr(-2);
-    const System.UInt32 SWP_SHOWWINDOW = 0x0040;
+    private const System.UInt32 SWP_SHOWWINDOW = 0x0040;
 
     [StructLayout(LayoutKind.Sequential)]
     public struct RECT {
@@ -93,7 +93,7 @@ public class AlwaysOnTop : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start() {
+    private void Start() {
         AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, true);
     }
 
