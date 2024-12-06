@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class UiUtils : MonoBehaviour
+public class UiUtils : Singleton<UiUtils>
 {
     public static event Action OnEnterUi;
     public static event Action OnExitUi;
 
-    private static bool m_isHover;
+    [SerializeField] private bool m_isHover;
     private static bool m_previousIsHover;
 
-    public static bool IsHover => m_isHover;
+    public static bool IsHover => Instance.m_isHover;
 
     private bool IsHoverUI()
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Placer : Tool
@@ -8,8 +6,9 @@ public class Placer : Tool
     private bool m_isPressed;
     [SerializeField] private GameObject m_placement;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         DisablePlacement();
     }
 
@@ -32,7 +31,7 @@ public class Placer : Tool
             return;
         }
 
-        Tilemap tilemap = TilemapHandler.Instance.GetTilemap();
+        Tilemap tilemap = TilemapHandler.Instance.GetCurrentTilemap();
         m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
 
         if (!m_isPressed) return;

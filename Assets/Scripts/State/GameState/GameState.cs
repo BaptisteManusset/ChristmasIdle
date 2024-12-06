@@ -1,19 +1,18 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameState : State
 {
     public virtual EGameState State => EGameState.None;
-    public Canvas UI;
+    public GameObject UI;
 
     public virtual void Awake()
     {
-        UI.enabled = false;
+        UI.SetActive(false);
     }
 
     public override void OnEnter()
     {
-        UI.enabled = true;
+        UI.SetActive(true);
     }
 
     public override void UpdateState()
@@ -22,6 +21,6 @@ public class GameState : State
 
     public override void OnExit()
     {
-        UI.enabled = false;
+        UI.SetActive(false);
     }
 }

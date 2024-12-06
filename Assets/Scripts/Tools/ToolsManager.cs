@@ -7,8 +7,6 @@ using UnityEngine.Tilemaps;
 
 public class ToolsManager : Singleton<ToolsManager>
 {
-    private List<Tool> m_tools = new();
-
     public Tool current;
 
 
@@ -21,15 +19,15 @@ public class ToolsManager : Singleton<ToolsManager>
     [SerializeField] private TMP_Text m_currentTilemap;
     [SerializeField] private TMP_Text m_currentTool;
 
+    private Picker m_picker;
+    private Placer m_placer;
+    private Eraser m_eraser;
 
-    [SerializeField] private Picker m_picker;
-    [SerializeField] private Placer m_placer;
-    [SerializeField] private Eraser m_eraser;
 
     public void SetCurrentTilemap(TileBase a_tile)
     {
         currentTile = a_tile;
-        m_currentTilemap.text = currentTile.GetType().Name;
+        m_currentTilemap.text = currentTile.name;
     }
 
     public TileBase GetCurrentTilemap()
@@ -40,6 +38,8 @@ public class ToolsManager : Singleton<ToolsManager>
     public void SetCurrentTool(Tool a_tool)
     {
         if (current) current.OnDeselect();
+        Debug.Log("change tool: " + a_tool.name);
+
         current = a_tool;
         if (current) current.OnSelect();
 
@@ -58,11 +58,7 @@ public class ToolsManager : Singleton<ToolsManager>
         m_eraser = GetComponent<Eraser>();
         m_placer = GetComponent<Placer>();
         m_picker = GetComponent<Picker>();
-        ((GameStateController)GameStateController.Instance).OnGameStateChange += OnGameStateChange;
-
         base.Awake();
-        m_tools.AddRange(GetComponents<Tool>());
-
         LeftDown.Enable();
         LeftDown.started += OnLeftStarted;
         LeftDown.performed += OnLeftPerformed;
@@ -70,25 +66,10 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.started += OnRightStarted;
         RightDown.performed += OnRightPerformed;
         RightDown.canceled += OnRightCanceled;
-    }
 
-    private void OnGameStateChange(EGameState a_state)
-    {
-        switch (a_state)
-        {
-            case EGameState.EditState:
-                LeftDown.Enable();
-                RightDown.Enable();
-                break;
-            case EGameState.Menu:
-                LeftDown.Disable();
-                RightDown.Disable();
-                break;
-            case EGameState.Idle:
-                LeftDown.Disable();
-                RightDown.Disable();
-                break;
-        }
+
+        LeftDown.Enable();
+        RightDown.Enable();
     }
 
     private void OnDestroy()
@@ -99,8 +80,6 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.started -= OnRightStarted;
         RightDown.performed -= OnRightPerformed;
         RightDown.canceled -= OnRightCanceled;
-
-        ((GameStateController)GameStateController.Instance).OnGameStateChange -= OnGameStateChange;
     }
 
     #endregion
