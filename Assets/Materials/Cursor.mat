@@ -51,6 +51,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Scale: 3
+    - _Thickness: 0.979
     m_Colors:
     - _Color1: {r: 1, g: 0.5254902, b: 0, a: 0}
     - _Color2: {r: 0.05933038, g: 0.0240299, b: 0.33962262, a: 0}
