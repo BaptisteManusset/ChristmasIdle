@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -6,6 +7,8 @@ using UnityEngine.Tilemaps;
 
 public static class Utils
 {
+ 
+    
     public static Vector3Int GetMousePosition(this Grid a_grid)
     {
         // save the camera as public field if you using not the main camera
@@ -27,22 +30,5 @@ public static class Utils
         return null;
     }
 
-    public static bool IsHoverUI()
-    {
-        PointerEventData pointerEventData = new(EventSystem.current)
-        {
-            position = Mouse.current.position.ReadValue()
-        };
-        List<RaycastResult> raycastResultsList = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, raycastResultsList);
-        for (int i = 0; i < raycastResultsList.Count; i++)
-        {
-            if (raycastResultsList[i].gameObject != null)
-            {
-                return true;
-            }
-        }
 
-        return false;
-    }
 }

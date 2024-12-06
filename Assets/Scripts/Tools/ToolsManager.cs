@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -57,6 +58,8 @@ public class ToolsManager : Singleton<ToolsManager>
         m_eraser = GetComponent<Eraser>();
         m_placer = GetComponent<Placer>();
         m_picker = GetComponent<Picker>();
+        ((GameStateController)GameStateController.Instance).OnGameStateChange += OnGameStateChange;
+
         base.Awake();
         m_tools.AddRange(GetComponents<Tool>());
 
@@ -69,6 +72,25 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.canceled += OnRightCanceled;
     }
 
+    private void OnGameStateChange(EGameState a_state)
+    {
+        switch (a_state)
+        {
+            case EGameState.EditState:
+                LeftDown.Enable();
+                RightDown.Enable();
+                break;
+            case EGameState.Menu:
+                LeftDown.Disable();
+                RightDown.Disable();
+                break;
+            case EGameState.Idle:
+                LeftDown.Disable();
+                RightDown.Disable();
+                break;
+        }
+    }
+
     private void OnDestroy()
     {
         LeftDown.started -= OnLeftStarted;
@@ -77,6 +99,8 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.started -= OnRightStarted;
         RightDown.performed -= OnRightPerformed;
         RightDown.canceled -= OnRightCanceled;
+
+        ((GameStateController)GameStateController.Instance).OnGameStateChange -= OnGameStateChange;
     }
 
     #endregion

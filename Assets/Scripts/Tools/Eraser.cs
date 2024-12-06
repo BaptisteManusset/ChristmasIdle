@@ -14,7 +14,7 @@
 
     protected virtual void Update()
     {
-        if (Utils.IsHoverUI()) return;
+        if (UiUtils.IsHover) return;
         if (m_isPressed)
         {
             TilemapHandler.Instance.GetTilemap()

@@ -10,13 +10,6 @@ public class TilemapHandler : Singleton<TilemapHandler>
 
     public Tilemap GetTilemap()
     {
-        if (GameStateController.Instance.Current.State == EGameState.Menu)
-        {
-            Debug.Log("menu map");
-            return menuMap;
-        }
-
-        Debug.Log("world map");
-        return tileMap;
+        return GameStateController.Instance.Current.State == EGameState.Menu ? menuMap : tileMap;
     }
 }

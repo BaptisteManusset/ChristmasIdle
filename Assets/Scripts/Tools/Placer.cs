@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
@@ -7,10 +8,16 @@ public class Placer : Tool
     private bool m_isPressed;
     [SerializeField] private GameObject m_placement;
 
+    private void Awake()
+    {
+        DisablePlacement();
+    }
+
     public override void OnLeftStarted()
     {
         m_isPressed = true;
     }
+
 
     public override void OnLeftCanceled()
     {
@@ -19,16 +26,16 @@ public class Placer : Tool
 
     protected virtual void Update()
     {
-        if (Utils.IsHoverUI())
+        if (UiUtils.IsHover)
         {
             m_placement.gameObject.SetActive(false);
             return;
         }
 
-
-        if (!m_isPressed) return;
         Tilemap tilemap = TilemapHandler.Instance.GetTilemap();
         m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
+
+        if (!m_isPressed) return;
         tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), ToolsManager.Instance.GetCurrentTilemap());
     }
 
@@ -36,11 +43,25 @@ public class Placer : Tool
     {
         base.OnSelect();
         m_placement.SetActive(true);
+        UiUtils.OnEnterUi += DisablePlacement;
+        UiUtils.OnExitUi += EnablePlacement;
     }
 
     public override void OnDeselect()
     {
         base.OnDeselect();
         m_placement.SetActive(false);
+        UiUtils.OnEnterUi -= DisablePlacement;
+        UiUtils.OnExitUi -= EnablePlacement;
+    }
+
+    private void DisablePlacement()
+    {
+        m_placement.gameObject.SetActive(false);
+    }
+
+    private void EnablePlacement()
+    {
+        m_placement.gameObject.SetActive(true);
     }
 }

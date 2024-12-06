@@ -4,7 +4,7 @@ public class Picker : Tool
 {
     public override void OnLeftStarted()
     {
-        if (Utils.IsHoverUI() && GameStateController.Instance.Current.State == EGameState.Ingame) return;
+        if (UiUtils.IsHover && GameStateController.Instance.Current.State == EGameState.EditState) return;
         TileBase tileBase = TilemapHandler.Instance.GetTilemap().GetTileFromMousePosition();
         if (tileBase == null) return;
         ToolsManager.Instance.SetCurrentTilemap(tileBase);

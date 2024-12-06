@@ -11,7 +11,7 @@ public abstract class StateController : Singleton<StateController>
         if (m_currentState) m_currentState.UpdateState();
     }
 
-    public void ChangeState(GameState a_newState)
+    public virtual void ChangeState(GameState a_newState)
     {
         Debug.Log("new state: " + a_newState.State);
         if (m_currentState) m_currentState.OnExit();

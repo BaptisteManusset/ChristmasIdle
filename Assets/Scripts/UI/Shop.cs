@@ -35,6 +35,7 @@ public class Shop : Singleton<Shop>
         IsOpen = true;
         m_background.gameObject.SetActive(true);
         m_library.gameObject.SetActive(true);
+        ToolsManager.Instance.SetPicker();
     }
 
     private void Close()
