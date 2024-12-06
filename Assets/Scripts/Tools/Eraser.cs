@@ -14,11 +14,11 @@
 
     protected virtual void Update()
     {
-        if (Utils.IsHoverUI()) return;
+        if (UiUtils.IsHover) return;
         if (m_isPressed)
         {
-            TilemapHandler.Instance.GetTilemap()
-                .SetTile(TilemapHandler.Instance.GetTilemap().layoutGrid.GetMousePosition(), null);
+            TilemapHandler.Instance.GetCurrentTilemap()
+                .SetTile(TilemapHandler.Instance.GetCurrentTilemap().layoutGrid.GetMousePosition(), null);
         }
     }
 }

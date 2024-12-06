@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
@@ -27,22 +26,17 @@ public static class Utils
         return null;
     }
 
-    public static bool IsHoverUI()
-    {
-        PointerEventData pointerEventData = new(EventSystem.current)
-        {
-            position = Mouse.current.position.ReadValue()
-        };
-        List<RaycastResult> raycastResultsList = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(pointerEventData, raycastResultsList);
-        for (int i = 0; i < raycastResultsList.Count; i++)
-        {
-            if (raycastResultsList[i].gameObject != null)
-            {
-                return true;
-            }
-        }
 
-        return false;
+    public static Sprite GetTilePreview(this TileBase a_tile)
+    {
+        Sprite sprite = a_tile switch
+        {
+            Tile temp => temp.sprite,
+            RuleTile temp => temp.m_DefaultSprite,
+            RuleOverrideTile temp => temp.m_Sprites.First().m_OverrideSprite,
+            AnimatedTile temp => temp.m_AnimatedSprites.First(),
+            _ => null
+        };
+        return sprite;
     }
 }
