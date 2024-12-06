@@ -1,22 +1,20 @@
-using System;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class Tool : MonoBehaviour
 {
-    [SerializeField] protected Button m_button;
+    [SerializeField] protected BetterButton m_button;
 
-    public Button Button => m_button;
+    public BetterButton Button => m_button;
 
     protected virtual void Awake()
     {
-        m_button.onClick.AddListener(OnButtonClick);
+        if (m_button) m_button.onClick.AddListener(OnButtonClick);
     }
 
     protected virtual void OnDestroy()
     {
-        m_button.onClick.RemoveListener(OnButtonClick);
+        if (m_button) m_button.onClick.RemoveListener(OnButtonClick);
     }
 
     public virtual void OnLeftCanceled()
@@ -55,6 +53,9 @@ public abstract class Tool : MonoBehaviour
 
     protected virtual void OnButtonClick()
     {
-        ToolsManager.Instance.SetCurrentTool(this);
+        ToolsManager.Instance.SetTool(this);
+        if(m_button)
+        {
+        }
     }
 }

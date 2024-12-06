@@ -8,8 +8,11 @@ public class Picker : Tool
 
         TileBase tileBase = TilemapHandler.Instance.GetCurrentTilemap().GetTileFromMousePosition();
         if (tileBase == null) return;
-        ToolsManager.Instance.SetCurrentTilemap(tileBase);
-        ToolsManager.Instance.SetPlacer();
+        ToolsManager.Instance.SetCurrentTile(tileBase);
+        if (GameStateController.Instance.Current.State == EGameState.EditState)
+        {
+            ToolsManager.Instance.SetPlacer();
+        }
     }
 
     private bool CanPick()

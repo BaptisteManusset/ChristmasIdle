@@ -12,6 +12,24 @@ public class Placer : Tool
         DisablePlacement();
     }
 
+ 
+
+    private void OnGameStateChanged(EGameState a_state)
+    {
+        switch (a_state)
+        {
+            case EGameState.EditState:
+                EnablePlacement();
+                break;
+            case EGameState.Menu:
+                DisablePlacement();
+                break;
+            case EGameState.Idle:
+                DisablePlacement();
+                break;
+        }
+    }
+
     public override void OnLeftStarted()
     {
         m_isPressed = true;
@@ -35,7 +53,7 @@ public class Placer : Tool
         m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
 
         if (!m_isPressed) return;
-        tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), ToolsManager.Instance.GetCurrentTilemap());
+        tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), ToolsManager.Instance.GetCurrentTile());
     }
 
     public override void OnSelect()

@@ -1,7 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
-
-public class IdleState : GameState
+﻿public class IdleState : GameState
 {
     public override EGameState State => EGameState.Idle;
+
+    public override void OnEnter()
+    {
+        base.OnEnter();
+        ToolsManager.Instance.SetTool(null);
+    }
 }

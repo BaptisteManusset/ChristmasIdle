@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameStateController : StateController
 {
@@ -10,7 +9,7 @@ public class GameStateController : StateController
     [SerializeField] private ShopState m_uiState;
     [SerializeField] private IdleState m_idleState;
 
-    public event Action<EGameState> OnGameStateChange;
+    public event Action<EGameState> OnGameStateChanged;
 
     private void Start()
     {
@@ -24,7 +23,7 @@ public class GameStateController : StateController
     public override void ChangeState(GameState a_newState)
     {
         base.ChangeState(a_newState);
-        OnGameStateChange?.Invoke(a_newState.State);
+        OnGameStateChanged?.Invoke(a_newState.State);
     }
 }
 

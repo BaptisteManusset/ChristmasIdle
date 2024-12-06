@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public static class Utils
 {
- 
-    
     public static Vector3Int GetMousePosition(this Grid a_grid)
     {
         // save the camera as public field if you using not the main camera
@@ -31,4 +27,16 @@ public static class Utils
     }
 
 
+    public static Sprite GetTilePreview(this TileBase a_tile)
+    {
+        Sprite sprite = a_tile switch
+        {
+            Tile temp => temp.sprite,
+            RuleTile temp => temp.m_DefaultSprite,
+            RuleOverrideTile temp => temp.m_Sprites.First().m_OverrideSprite,
+            AnimatedTile temp => temp.m_AnimatedSprites.First(),
+            _ => null
+        };
+        return sprite;
+    }
 }
