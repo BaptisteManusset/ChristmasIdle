@@ -1,5 +1,10 @@
 using UnityEngine;
-
+// ReSharper disable RedundantUsingDirective
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+// ReSharper restore RedundantUsingDirective
 
 public class TransparancyManasger : MonoBehaviour
 {
