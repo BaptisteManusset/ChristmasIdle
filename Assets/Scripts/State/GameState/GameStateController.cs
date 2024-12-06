@@ -7,7 +7,7 @@ public class GameStateController : StateController
     [SerializeField]
     private EditState m_edit;
 
-    [SerializeField] private UiState m_uiState;
+    [SerializeField] private ShopState m_uiState;
     [SerializeField] private IdleState m_idleState;
 
     public event Action<EGameState> OnGameStateChange;
