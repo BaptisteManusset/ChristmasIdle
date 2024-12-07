@@ -31,7 +31,7 @@ public class MobTile : RuleTile<MobTile.Neighbor>
 
     public override void GetTileData(Vector3Int a_position, ITilemap a_tilemap, ref TileData a_tileData)
     {
-        if (TilemapHandler.Instance.IsWorldTilemap(a_tilemap))
+        if (TilemapHandler.Instance.IsWorldTilemap(a_tilemap) && Application.isPlaying)
         {
             Debug.Log($"{a_position} count: {count}");
             Tilemap tilemap = a_tilemap.GetComponent<Tilemap>();
