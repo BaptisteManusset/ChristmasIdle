@@ -22,4 +22,9 @@ public class TilemapHandler : Singleton<TilemapHandler>
         UIParent.gameObject.SetActive(a_showMenu);
         WorldParent.gameObject.SetActive(!a_showMenu);
     }
+
+    public bool IsWorldTilemap(ITilemap a_tilemapToTest)
+    {
+        return tileMap == a_tilemapToTest.GetComponent<Tilemap>();
+    }
 }

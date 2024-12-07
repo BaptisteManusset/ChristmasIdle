@@ -12,7 +12,6 @@ public class Placer : Tool
         DisablePlacement();
     }
 
- 
 
     private void OnGameStateChanged(EGameState a_state)
     {
@@ -49,11 +48,18 @@ public class Placer : Tool
             return;
         }
 
+        TileBase tile = ToolsManager.Instance.GetCurrentTile();
+
         Tilemap tilemap = TilemapHandler.Instance.GetCurrentTilemap();
         m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
 
         if (!m_isPressed) return;
-        tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), ToolsManager.Instance.GetCurrentTile());
+        tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), tile);
+
+        if (tile.GetType() == typeof(MobTile))
+        {
+            m_isPressed = false;
+        }
     }
 
     public override void OnSelect()

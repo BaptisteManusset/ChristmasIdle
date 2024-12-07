@@ -52,8 +52,9 @@ MonoBehaviour:
   idleTime: 2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   groundCheckDistance: 0.1
+  destination: {x: 0, y: 0}
 --- !u!50 &4716968870056428592
 Rigidbody2D:
   serializedVersion: 4
