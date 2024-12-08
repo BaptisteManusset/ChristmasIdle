@@ -47,14 +47,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b470c59a17347c44cb7f0663933ec22a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  wanderRange: 5
-  idleTime: 2
-  groundLayer:
+  maxDistance: 3
+  direction: -1
+  end: {x: -7, y: 2, z: 0}
+  speed: 1
+  duration: 0
+  progress: 0
+  waitTime: {x: 1, y: 3}
+  moving: 0
+  destination: {x: 5, y: 2, z: 0}
+  origin: {x: 0, y: 0, z: 0}
+  distance: 0
+  jumpProfil:
     serializedVersion: 2
-    m_Bits: 0
-  groundCheckDistance: 0.1
-  destination: {x: 0, y: 0}
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.0181745
+      outSlope: 1.0181745
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.094972044
+    - serializedVersion: 3
+      time: 0.56327236
+      value: 0.83684134
+      inSlope: -0.08491429
+      outSlope: -0.08491429
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.067708895
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.6675515
+      outSlope: -2.6675515
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0946603
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!50 &4716968870056428592
 Rigidbody2D:
   serializedVersion: 4
