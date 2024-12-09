@@ -54,11 +54,21 @@ public class Placer : Tool
         m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
 
         if (!m_isPressed) return;
-        tilemap.SetTile(tilemap.layoutGrid.GetMousePosition(), tile);
+
+        Vector3Int tilePos = tilemap.layoutGrid.GetMousePosition();
 
         if (tile.GetType() == typeof(MobTile))
         {
+            if (tilemap.GetTile(tilePos) == null)
+            {
+                tilemap.SetTile(tilePos, tile);
+            }
+
             m_isPressed = false;
+        }
+        else
+        {
+            tilemap.SetTile(tilePos, tile);
         }
     }
 

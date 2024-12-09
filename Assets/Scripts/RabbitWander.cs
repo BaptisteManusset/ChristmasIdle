@@ -1,9 +1,7 @@
 using System;
-using DG.Tweening;
 using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -17,9 +15,6 @@ public class RabbitWander : MonoBehaviour
 
     public float speed = .1f;
 
-    public float duration;
-    public float progress;
-
     [MinMaxSlider(0, 10)] public Vector2 waitTime;
 
     public bool moving;
@@ -27,57 +22,83 @@ public class RabbitWander : MonoBehaviour
     public Vector3 destination;
 
     public Vector3 origin;
+    private Rigidbody2D rb;
+
+
+    public Vector3Int CurrentCell
+    {
+        get
+        {
+            if (tilemap == null) tilemap = GetComponentInParent<Tilemap>();
+            return tilemap.WorldToCell(transform.position);
+        }
+    }
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         tilemap = GetComponentInParent<Tilemap>();
     }
 
     private void OnEnable()
     {
-        Test();
+        StartNewMovement();
     }
 
-    public float distance;
-    public AnimationCurve jumpProfil;
-
+    private bool isFalling = false;
     private void Update()
     {
+        if (IsFalling())
+        {
+            moving = false;
+            isFalling = true;
+            return;
+        }
+
+        if (isFalling)
+        {
+            OnComplete();
+            isFalling = false;
+        }
+
         if (moving)
         {
-            if (progress >= duration)
+            if (Vector2.Distance(rb.position, destination) <= .1f)
             {
-                progress = 0;
                 moving = false;
                 OnComplete();
             }
             else
             {
-                progress += Time.deltaTime * speed / distance;
-
-                Vector3 newPosition = new(
-                    math.lerp(origin.x, destination.x, progress),
-                    origin.y + jumpProfil.Evaluate(progress));
-                transform.position = newPosition;
+                rb.MovePosition(rb.position + Vector2.right * (direction * speed * Time.deltaTime));
             }
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(destination, .1f);
+        Gizmos.DrawLine(destination, transform.position);
+    }
+
+    private bool IsFalling()
+    {
+        return rb.velocity.y < 0;
+    }
+
     [Button]
-    public void Test()
+    public void StartNewMovement()
     {
         Vector3Int randomPos = Vector3Int.right * Random.Range(-maxDistance, maxDistance + 1);
 
 
-        Vector3Int originCell = tilemap.WorldToCell(transform.position);
+        Vector3Int originCell = CurrentCell;
         end = HavePath(originCell, originCell + randomPos);
         if (originCell != end)
         {
             moving = true;
             destination = tilemap.GetCellCenterWorld(end);
             origin = transform.position;
-            distance = Math.Abs(end.x - origin.x);
-            duration = 1;
         }
         else
         {
@@ -88,7 +109,7 @@ public class RabbitWander : MonoBehaviour
     private void OnComplete()
     {
         Debug.Log("Complete");
-        Invoke(nameof(Test), Random.Range(waitTime.x, waitTime.y));
+        Invoke(nameof(StartNewMovement), Random.Range(waitTime.x, waitTime.y));
     }
 
     private Vector3Int HavePath(Vector3Int a_start, Vector3Int a_end)
