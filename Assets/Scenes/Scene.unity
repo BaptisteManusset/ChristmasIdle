@@ -2741,7 +2741,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.7071079}
   m_LocalPosition: {x: 0, y: 10, z: 4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 40, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -2895,7 +2895,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 2
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -3459,7 +3459,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 40, y: 1, z: 1}
+    m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -8023,7 +8023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1102580109705782713, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1102580109705782713, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8095,7 +8095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6046515792237551069, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6046515792237551069, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8131,7 +8131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8321690326142200675, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8321690326142200675, guid: 4675860a9f71f934db8eef69455c7444, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8154,6 +8154,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 606930698}
     m_Modifications:
+    - target: {fileID: 297875846262019913, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1952477140426060088, guid: e8b54018240d59346a8f39c08097338d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -8241,6 +8245,26 @@ PrefabInstance:
     - target: {fileID: 8365444433434911028, guid: e8b54018240d59346a8f39c08097338d, type: 3}
       propertyPath: m_Name
       value: Shop UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023197891059393726, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023197891059393726, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023197891059393726, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023197891059393726, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023197891059393726, guid: e8b54018240d59346a8f39c08097338d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
