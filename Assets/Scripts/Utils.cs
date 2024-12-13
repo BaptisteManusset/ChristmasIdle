@@ -26,6 +26,21 @@ public static class Utils
         return null;
     }
 
+    /// <summary>
+    /// Get tile from a worldspace position
+    /// </summary>
+    public static TileBase GetTileWorld(this Tilemap a_tilemap, Vector3 a_position)
+    {
+        Vector3Int coor = a_tilemap.WorldToCell(a_position);
+        return a_tilemap.GetTile(coor);
+    }
+
+    // public static TileBase GetUpTile(this  Tilemap a_tilemap, TileBase a_tile)
+    // {
+    //     a_tilemap.get
+    //     
+    //     return a_tile.
+    // }
 
     public static Sprite GetTilePreview(this TileBase a_tile)
     {
