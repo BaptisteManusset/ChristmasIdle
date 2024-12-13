@@ -33,7 +33,6 @@ public class MobTile : RuleTile<MobTile.Neighbor>
     {
         if (TilemapHandler.Instance.IsWorldTilemap(a_tilemap) && Application.isPlaying)
         {
-            Debug.Log($"{a_position} count: {count}");
             Tilemap tilemap = a_tilemap.GetComponent<Tilemap>();
             Instantiate(m_mob, a_position + Position, quaternion.identity, tilemap.transform);
             tilemap.SetTile(a_position, null);
@@ -50,7 +49,6 @@ public class MobTile : RuleTile<MobTile.Neighbor>
 
     public override void RefreshTile(Vector3Int a_position, ITilemap a_tilemap)
     {
-        Debug.Log($"RefreshTile: {a_position}  {a_tilemap}");
         base.RefreshTile(a_position, a_tilemap);
     }
 }

@@ -108,7 +108,6 @@ public class RabbitWander : MonoBehaviour
 
     private void OnComplete()
     {
-        Debug.Log("Complete");
         Invoke(nameof(StartNewMovement), Random.Range(waitTime.x, waitTime.y));
     }
 
