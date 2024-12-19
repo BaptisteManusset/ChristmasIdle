@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bee
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 1352218545, guid: d8bd1a0a2306f7e4e9e514b373f85a33, type: 3}
-  - {fileID: 1995295691, guid: d8bd1a0a2306f7e4e9e514b373f85a33, type: 3}
+  - {fileID: -841383632, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
+  - {fileID: 626700576, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
   m_MinSpeed: 2
   m_MaxSpeed: 2
   m_AnimationStartTime: 0

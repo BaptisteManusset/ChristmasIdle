@@ -12,16 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Mushroom
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -423285914, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  m_DefaultSprite: {fileID: -1754120256, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -423285914, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
-    - {fileID: 203602339, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
-    - {fileID: -1484649940, guid: d8bd1a0a2306f7e4e9e514b373f85a33, type: 3}
-    - {fileID: -1773969484, guid: d8bd1a0a2306f7e4e9e514b373f85a33, type: 3}
+    - {fileID: -1402838127, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
+    - {fileID: -1754120256, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1

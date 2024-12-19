@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Flag
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -836386612, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
-  - {fileID: -1963352089, guid: 2b46bda86ec0d33468fe931929a9d323, type: 3}
+  - {fileID: -90636326, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
+  - {fileID: 1662149124, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
   m_MinSpeed: 3
   m_MaxSpeed: 3
   m_AnimationStartTime: 0
