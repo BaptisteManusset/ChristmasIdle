@@ -22,7 +22,15 @@ public class SnowflakeScaleSlider : MonoBehaviour
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);
         m_text = GetComponentInChildren<TMP_Text>(true);
         pMain = m_snow.main;
-        Call(m_slider.value);
+        m_slider.value = SettingManager.Instance.Setting.SnowflakeScale;
+        pMain.startSize = m_slider.value;
+
+        SaveManager.Instance.OnLoad += OnLoad;
+    }
+
+    private void OnLoad()
+    {
+        Call(SettingManager.Instance.Setting.SnowflakeScale);
     }
 
     private void Toggle(bool a_state)
@@ -33,6 +41,7 @@ public class SnowflakeScaleSlider : MonoBehaviour
 
     private void Call(float a_value)
     {
+        SettingManager.Instance.Setting.SnowflakeScale = a_value;
         m_text.text = $"Snowflake size: {a_value:F}";
         pMain.startSize = a_value;
     }
