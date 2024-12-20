@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011660f9168bf75418d7e0c75107a9cd, type: 3}
   m_Name: yeti
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -1168294537, guid: 5a708c13a824b1a4bb53b2b6448b6c45, type: 3}
+  m_DefaultSprite: {fileID: -299290575, guid: d395f30317c7ed74fb10376cb6599156, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
   m_TilingRules: []

@@ -9,6 +9,8 @@ public class SiblingRuleTile : RuleTile
     {
         Environment,
         Plant,
+        Tree,
+        House,
         Other
     }
     public SiblingGroup m_siblingGroup;
