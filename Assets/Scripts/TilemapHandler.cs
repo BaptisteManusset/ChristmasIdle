@@ -12,6 +12,12 @@ public class TilemapHandler : Singleton<TilemapHandler>
 
     [SerializeField] private TMP_Text m_currentTilemap;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        UIParent.SetActive(false);
+    }
+
     public Tilemap GetCurrentTilemap()
     {
         return GameStateController.Instance.Current.State == EGameState.Menu ? menuMap : tileMap;
