@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 
@@ -61,5 +58,10 @@ public class SaveManager : Singleton<SaveManager>
     public void ClearTilemap()
     {
         TilemapHandler.Instance.TileMap.ClearAllTiles();
+    }
+
+    public void AddKey(string a_key, object a_value)
+    {
+        
     }
 }

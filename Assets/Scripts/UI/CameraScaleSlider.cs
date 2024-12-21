@@ -12,27 +12,27 @@ public class CameraScaleSlider : MonoBehaviour
     private void Awake()
     {
         m_slider = GetComponent<Slider>();
-        m_slider.onValueChanged.AddListener(Call);
+        m_slider.onValueChanged.AddListener(ValueChange);
         m_camera = Camera.main;
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);
         m_text = GetComponentInChildren<TMP_Text>(true);
         m_slider.value = SettingManager.Instance.Setting.CameraScale;
-        UpdateElement(m_slider.value);
-        SaveManager.Instance.OnLoad += OnLoad;
+        SetSliderValue(SettingManager.CAMERA_SCALE);
+        SaveManager.Instance.OnLoad += OnSaveLoad;
     }
 
-    private void OnLoad()
+    private void OnSaveLoad()
     {
-        Call(SettingManager.Instance.Setting.CameraScale);
+        ValueChange(SettingManager.Instance.Setting.CameraScale);
     }
 
-    private void Call(float a_value)
+    private void ValueChange(float a_value)
     {
         SettingManager.Instance.Setting.CameraScale = a_value;
-        UpdateElement(a_value);
+        SetSliderValue(a_value);
     }
 
-    private void UpdateElement(float a_value)
+    private void SetSliderValue(float a_value)
     {
         m_camera.orthographicSize = a_value;
         m_snow.transform.position = new Vector3(0, a_value, 0);
