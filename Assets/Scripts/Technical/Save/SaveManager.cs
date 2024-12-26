@@ -7,6 +7,9 @@ using UnityEngine.Tilemaps;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    public TilesLibrary Library;
+    public const string FILEPATH = "SAVE.SAV";
+
     private Tilemap m_tilemap;
 
     public SaveData CurrentSave;
@@ -20,24 +23,29 @@ public class SaveManager : Singleton<SaveManager>
         if (CurrentSave == null) CurrentSave = new SaveData();
     }
 
+#if UNITY_EDITOR
     [Button]
+#endif
     public void Save()
     {
         List<Utils.TileAndPos> tiles = TilemapHandler.Instance.TileMap.GetTiles();
         CurrentSave = new SaveData(tiles, SettingManager.Instance.Setting);
-        ES3.Save("save", CurrentSave);
+        ES3.Save("save", CurrentSave, FILEPATH);
     }
 
+#if UNITY_EDITOR
     [Button]
+#endif
     public void LoadSave()
     {
-        CurrentSave = ES3.Load<SaveData>("save");
+        CurrentSave = ES3.Load<SaveData>("save", FILEPATH);
 
         TilemapHandler.Instance.TileMap.ClearAllTiles();
         for (int i = 0; i < CurrentSave.Tiles.Count; i++)
         {
-            TilemapHandler.Instance.TileMap.SetTile((Vector3Int)CurrentSave.Tiles[i].Position,
-                CurrentSave.Tiles[i].Tile);
+            TileBase tile = Library.GetTile(CurrentSave.Tiles[i].Tile);
+            Vector3Int pos = (Vector3Int)CurrentSave.Tiles[i].Position;
+            TilemapHandler.Instance.TileMap.SetTile(pos, tile);
         }
 
         SettingManager.Instance.SetSetting(new Settings
@@ -48,13 +56,17 @@ public class SaveManager : Singleton<SaveManager>
         OnLoad?.Invoke();
     }
 
+#if UNITY_EDITOR
     [Button]
+#endif
     public void DeleteSave()
     {
         CurrentSave = null;
     }
 
+#if UNITY_EDITOR
     [Button]
+#endif
     public void ClearTilemap()
     {
         TilemapHandler.Instance.TileMap.ClearAllTiles();
@@ -62,6 +74,5 @@ public class SaveManager : Singleton<SaveManager>
 
     public void AddKey(string a_key, object a_value)
     {
-        
     }
 }

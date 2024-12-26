@@ -14,7 +14,7 @@ public class SnowflakeScaleSlider : MonoBehaviour
 
     private void Awake()
     {
-        m_slider = GetComponent<Slider>();
+        m_slider = GetComponentInChildren<Slider>(true);
         m_toggle = GetComponentInChildren<Toggle>(true);
         m_slider.onValueChanged.AddListener(SetSliderValue);
         m_toggle.onValueChanged.AddListener(Toggle);
@@ -22,12 +22,15 @@ public class SnowflakeScaleSlider : MonoBehaviour
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);
         m_text = GetComponentInChildren<TMP_Text>(true);
         m_main = m_snow.main;
-        m_slider.value = SettingManager.Instance.Setting.SnowflakeScale;
-        m_main.startSize = m_slider.value;
-
-        SetSliderValue(SettingManager.SNOWFLAKE_SCALE);
 
         SaveManager.Instance.OnLoad += OnSaveLoad;
+    }
+
+    private void OnEnable()
+    {
+        m_slider.value = SettingManager.Instance.Setting.SnowflakeScale;
+        m_main.startSize = m_slider.value;
+        SetSliderValue(SettingManager.SNOWFLAKE_SCALE);
     }
 
     private void OnSaveLoad()
@@ -44,6 +47,17 @@ public class SnowflakeScaleSlider : MonoBehaviour
 
     private void SetSliderValue(float a_value)
     {
+        if (a_value < 0)
+        {
+            m_slider.interactable = false;
+            m_toggle.isOn = false;
+        }
+        else
+        {
+            m_slider.interactable = true;
+            m_toggle.isOn = true;
+        }
+
         m_snow.gameObject.SetActive(a_value > 0);
         m_slider.interactable = a_value > 0;
 

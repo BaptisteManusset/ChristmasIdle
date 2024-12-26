@@ -11,7 +11,7 @@ public class CameraScaleSlider : MonoBehaviour
 
     private void Awake()
     {
-        m_slider = GetComponent<Slider>();
+        m_slider = GetComponentInChildren<Slider>(true);
         m_slider.onValueChanged.AddListener(ValueChange);
         m_camera = Camera.main;
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);

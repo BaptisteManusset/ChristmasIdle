@@ -1,4 +1,3 @@
-using System;
 using NaughtyAttributes;
 using Unity.Mathematics;
 using UnityEngine;
@@ -86,7 +85,9 @@ public class RabbitWander : MonoBehaviour
         return rb.velocity.y < 0;
     }
 
+#if UNITY_EDITOR
     [Button]
+#endif
     public void StartNewMovement()
     {
         Vector3Int randomPos = Vector3Int.right * Random.Range(-maxDistance, maxDistance + 1);

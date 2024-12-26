@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class StateController : Singleton<StateController>
+﻿public abstract class StateController : Singleton<StateController>
 {
     private GameState m_currentState;
 

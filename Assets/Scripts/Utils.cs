@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using Object = UnityEngine.Object;
 
 public static class Utils
 {
@@ -57,25 +58,6 @@ public static class Utils
         return sprite;
     }
 
-    // public static T[] GetTiles<T>(this Tilemap tilemap) where T : TileBase
-    // {
-    //     List<T> tiles = new List<T>();
-    //
-    //     for (int y = tilemap.origin.y; y < (tilemap.origin.y + tilemap.size.y); y++)
-    //     {
-    //         for (int x = tilemap.origin.x; x < (tilemap.origin.x + tilemap.size.x); x++)
-    //         {
-    //             T tile = tilemap.GetTile<T>(new Vector3Int(x, y, 0));
-    //             if (tile != null)
-    //             {
-    //                 tiles.Add(tile);
-    //             }
-    //         }
-    //     }
-    //
-    //     return tiles.ToArray();
-    // }
-
     public static List<TileAndPos> GetTiles(this Tilemap tilemap)
     {
         List<TileAndPos> tiles = new List<TileAndPos>();
@@ -98,17 +80,33 @@ public static class Utils
     [Serializable]
     public class TileAndPos
     {
-        [SerializeField] private TileBase m_tile;
+        [SerializeField] private String m_tile;
         [SerializeField] private Vector2Int m_position;
 
         public TileAndPos(TileBase a_tile, Vector2Int a_position)
         {
-            m_tile = a_tile;
+            m_tile = a_tile.name;
             m_position = a_position;
         }
 
-        public TileBase Tile => m_tile;
+        public string Tile => m_tile;
 
         public Vector2Int Position => m_position;
     }
+#if UNITY_EDITOR
+    public static List<T> LoadAsset<T>(string[] folders = null) where T : Object
+    {
+        List<T> list = new();
+        string[] guids = UnityEditor.AssetDatabase.FindAssets($"t={nameof(T)}", folders);
+
+        foreach (string guid in guids)
+        {
+            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+            T asset = UnityEditor.AssetDatabase.LoadAssetAtPath<T>(path);
+            list.Add(asset);
+        }
+
+        return list;
+    }
+#endif
 }
