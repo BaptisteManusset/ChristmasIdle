@@ -12,12 +12,12 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: christmaswindows
+  companyName: ItsBaptiste
+  productName: Chritsmas overlay
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 0}
-  m_ShowUnitySplashScreen: 1
+  m_ShowUnitySplashScreen: 0
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 0.5
   m_SplashScreenAnimation: 1
@@ -78,7 +78,7 @@ PlayerSettings:
   androidFullscreenMode: 1
   androidAutoRotationBehavior: 1
   defaultIsNativeResolution: 1
-  macRetinaSupport: 1
+  macRetinaSupport: 0
   runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
@@ -669,23 +669,24 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: DOTWEEN
-    EmbeddedLinux: DOTWEEN
+    Android: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    EmbeddedLinux: DOTWEEN;ES3_TMPRO;ES3_UGUI
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
-    Nintendo Switch: DOTWEEN
-    PS4: DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Nintendo Switch: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    PS4: DOTWEEN;ES3_TMPRO;ES3_UGUI
     PS5: DOTWEEN
-    QNX: DOTWEEN
+    QNX: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Server: ES3_TMPRO;ES3_UGUI
     Stadia: DOTWEEN
-    Standalone: DOTWEEN
-    VisionOS: DOTWEEN
-    WebGL: DOTWEEN
-    Windows Store Apps: DOTWEEN
-    XboxOne: DOTWEEN
-    iPhone: DOTWEEN
-    tvOS: DOTWEEN
+    Standalone: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    VisionOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    WebGL: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    Windows Store Apps: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    XboxOne: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    iPhone: DOTWEEN;ES3_TMPRO;ES3_UGUI
+    tvOS: DOTWEEN;ES3_TMPRO;ES3_UGUI
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

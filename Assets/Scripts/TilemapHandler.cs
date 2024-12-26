@@ -12,6 +12,7 @@ public class TilemapHandler : Singleton<TilemapHandler>
 
     [SerializeField] private TMP_Text m_currentTilemap;
 
+    public Tilemap TileMap => tileMap;
     protected override void Awake()
     {
         base.Awake();
