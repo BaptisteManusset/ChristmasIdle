@@ -15,9 +15,12 @@ public class ButtonFeedback : MonoBehaviour
         m_betterButton.image.sprite = m_defaultSprite;
 
         m_betterButton.onClick.AddListener(OnClick);
-        OnSelectChange += OnSelectChanged;
     }
 
+    private void Start()
+    {
+        OnSelectChange += OnSelectChanged;
+    }
 
     private void OnDestroy()
     {
@@ -33,10 +36,21 @@ public class ButtonFeedback : MonoBehaviour
     {
         if (m_betterButton == a_button)
         {
-            m_betterButton.image.sprite = m_selectSprite;
+            Select();
             return;
         }
 
+        Deselect();
+    }
+
+    public void Select()
+    {
+        m_betterButton.image.sprite = m_selectSprite;
+    }
+
+    public void Deselect()
+    {
+        if (!m_betterButton) m_betterButton = GetComponent<BetterButton>();
         m_betterButton.image.sprite = m_defaultSprite;
     }
 }

@@ -42,10 +42,12 @@ public abstract class Tool : MonoBehaviour
 
     public virtual void OnSelect()
     {
+        if (m_button) m_button.Select();
     }
 
     public virtual void OnDeselect()
     {
+        if (m_button) m_button.Deselect();
     }
 
     protected virtual void OnButtonClick()

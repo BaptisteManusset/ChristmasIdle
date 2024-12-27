@@ -28,26 +28,29 @@ public class TilesLibrary : ScriptableObject
     [SerializeField] private List<TilebasePair> m_tiles = new();
     public List<TilebasePair> Tiles => m_tiles;
 
-#if UNITY_EDITOR
-    [Button]
-#endif
-    [ContextMenu("Populate")]
     public void Populate()
     {
 #if UNITY_EDITOR
         string[] guids = AssetDatabase.FindAssets("t=tilebase");
         m_tiles.Clear();
+        List<TileBase> tempList = new List<TileBase>();
         for (int i = 0; i < guids.Length; i++)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-            TileBase tile = AssetDatabase.LoadAssetAtPath<TileBase>(path);
+            tempList.Add(AssetDatabase.LoadAssetAtPath<TileBase>(path));
+        }
+
+        tempList = tempList.OrderBy(AssetDatabase.IsSubAsset).ToList();
+
+        foreach (TileBase tile in tempList)
+        {
             m_tiles.Add(new TilebasePair(tile));
         }
+
 
         Debug.Log($"Update {nameof(TilesLibrary)}");
 #endif
     }
-
     public TileBase GetTile(string a_tile)
     {
         foreach (TilebasePair tile in m_tiles)
@@ -60,6 +63,8 @@ public class TilesLibrary : ScriptableObject
 
         return null;
     }
+
+    private void Reset() => Populate();
 }
 
 #if UNITY_EDITOR
