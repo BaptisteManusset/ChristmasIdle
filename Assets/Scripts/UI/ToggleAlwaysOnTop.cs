@@ -4,9 +4,11 @@ using UnityEngine.UI;
 public class ToggleAlwaysOnTop : MonoBehaviour
 {
     private Toggle m_toggle;
+
     private void Awake()
     {
         m_toggle = GetComponentInChildren<Toggle>(true);
+        m_toggle.isOn = true;
         m_toggle.onValueChanged.AddListener(OnChange);
     }
 
@@ -22,6 +24,7 @@ public class ToggleAlwaysOnTop : MonoBehaviour
 
     private void OnChange(bool a_value)
     {
+        if (SettingManager.Instance.Setting.AlwaysOnTop == a_value) return;
         AlwaysOnTop.Instance.ToggleAlwaysOnTop(a_value);
         SettingManager.Instance.Setting.AlwaysOnTop = a_value;
     }
