@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 public class Placer : Tool
 {
     private bool m_isPressed;
-    [SerializeField] private GameObject m_placement;
 
     protected override void Awake()
     {
@@ -12,46 +11,22 @@ public class Placer : Tool
         DisablePlacement();
     }
 
+    public override void OnLeftStarted() => m_isPressed = true;
 
-    private void OnGameStateChanged(EGameState a_state)
-    {
-        switch (a_state)
-        {
-            case EGameState.EditState:
-                EnablePlacement();
-                break;
-            case EGameState.Menu:
-                DisablePlacement();
-                break;
-            case EGameState.Idle:
-                DisablePlacement();
-                break;
-        }
-    }
-
-    public override void OnLeftStarted()
-    {
-        m_isPressed = true;
-    }
-
-
-    public override void OnLeftCanceled()
-    {
-        m_isPressed = false;
-    }
+    public override void OnLeftCanceled() => m_isPressed = false;
 
     protected virtual void Update()
     {
         if (UiUtils.IsHover)
         {
-            m_placement.gameObject.SetActive(false);
+            DisablePlacement();
             return;
         }
 
         TileBase tile = ToolsManager.Instance.GetCurrentTile();
 
         Tilemap tilemap = TilemapHandler.Instance.GetCurrentTilemap();
-        m_placement.transform.position = tilemap.layoutGrid.GetMousePosition();
+        CursorBackgroundHandler.Instance.SetPosition(tilemap.layoutGrid.GetMousePosition());
 
         if (!m_isPressed) return;
 
@@ -59,7 +34,7 @@ public class Placer : Tool
 
         if (tile.GetType() == typeof(MobTile))
         {
-            if (tilemap.GetTile(tilePos) == null)
+            if (!tilemap.GetTile(tilePos))
             {
                 tilemap.SetTile(tilePos, tile);
             }
@@ -75,7 +50,7 @@ public class Placer : Tool
     public override void OnSelect()
     {
         base.OnSelect();
-        m_placement.SetActive(true);
+        EnablePlacement();
         UiUtils.OnEnterUi += DisablePlacement;
         UiUtils.OnExitUi += EnablePlacement;
     }
@@ -83,18 +58,12 @@ public class Placer : Tool
     public override void OnDeselect()
     {
         base.OnDeselect();
-        m_placement.SetActive(false);
+        DisablePlacement();
         UiUtils.OnEnterUi -= DisablePlacement;
         UiUtils.OnExitUi -= EnablePlacement;
     }
 
-    private void DisablePlacement()
-    {
-        m_placement.gameObject.SetActive(false);
-    }
+    private void DisablePlacement() => CursorBackgroundHandler.Instance.Hide();
 
-    private void EnablePlacement()
-    {
-        m_placement.gameObject.SetActive(true);
-    }
+    private void EnablePlacement() => CursorBackgroundHandler.Instance.Show();
 }
