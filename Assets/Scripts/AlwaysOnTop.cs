@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using UnityEngine;
 
 
-public class AlwaysOnTop : Singleton<AlwaysOnTop> {
+public class AlwaysOnTop : Singleton<AlwaysOnTop>
+{
+    [SerializeField] private BoolRef m_value;
+
     #region WIN32API
 
     public static readonly System.IntPtr HWND_TOPMOST = new System.IntPtr(-1);
@@ -14,10 +18,12 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop> {
     private const System.UInt32 SWP_SHOWWINDOW = 0x0040;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct RECT {
+    public struct RECT
+    {
         public int Left, Top, Right, Bottom;
 
-        public RECT(int left, int top, int right, int bottom) {
+        public RECT(int left, int top, int right, int bottom)
+        {
             Left = left;
             Top = top;
             Right = right;
@@ -25,52 +31,49 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop> {
         }
 
         public RECT(System.Drawing.Rectangle r)
-            : this(r.Left, r.Top, r.Right, r.Bottom) {
+            : this(r.Left, r.Top, r.Right, r.Bottom)
+        {
         }
 
-        public int X {
-            get {
-                return Left;
-            }
-            set {
+        public int X
+        {
+            get { return Left; }
+            set
+            {
                 Right -= (Left - value);
                 Left = value;
             }
         }
 
-        public int Y {
-            get {
-                return Top;
-            }
-            set {
+        public int Y
+        {
+            get { return Top; }
+            set
+            {
                 Bottom -= (Top - value);
                 Top = value;
             }
         }
 
-        public int Height {
-            get {
-                return Bottom - Top;
-            }
-            set {
-                Bottom = value + Top;
-            }
+        public int Height
+        {
+            get { return Bottom - Top; }
+            set { Bottom = value + Top; }
         }
 
-        public int Width {
-            get {
-                return Right - Left;
-            }
-            set {
-                Right = value + Left;
-            }
+        public int Width
+        {
+            get { return Right - Left; }
+            set { Right = value + Left; }
         }
 
-        public static implicit operator System.Drawing.Rectangle(RECT r) {
+        public static implicit operator System.Drawing.Rectangle(RECT r)
+        {
             return new System.Drawing.Rectangle(r.Left, r.Top, r.Width, r.Height);
         }
 
-        public static implicit operator RECT(System.Drawing.Rectangle r) {
+        public static implicit operator RECT(System.Drawing.Rectangle r)
+        {
             return new RECT(r);
         }
     }
@@ -84,23 +87,28 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop> {
 
     [DllImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
-    private static extern bool SetWindowPos(System.IntPtr hWnd, System.IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
+    private static extern bool SetWindowPos(System.IntPtr hWnd, System.IntPtr hWndInsertAfter, int x, int y, int cx,
+        int cy, uint uFlags);
 
     #endregion
 
-
-    // Use this for initialization
     private void Start()
     {
-        ToggleAlwaysOnTop();
+        m_value.valueChanged += OnValueChange;
     }
 
-    public void ToggleAlwaysOnTop(bool a_alwaysOnTop = true)
+    protected override void OnDestroy()
     {
-        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, a_alwaysOnTop);
+        m_value.valueChanged -= OnValueChange;
     }
 
-    public bool AssignTopmostWindow(string WindowTitle, bool MakeTopmost) {
+    private void OnValueChange(bool a_value)
+    {
+        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, a_value);
+    }
+
+    public bool AssignTopmostWindow(string WindowTitle, bool MakeTopmost)
+    {
         UnityEngine.Debug.Log($"Assigning top most flg: {MakeTopmost} to window of title: {WindowTitle}");
 
         System.IntPtr hWnd = FindWindow((string)null, WindowTitle);
@@ -108,15 +116,19 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop> {
         RECT rect = new RECT();
         GetWindowRect(new HandleRef(this, hWnd), out rect);
 
-        return SetWindowPos(hWnd, MakeTopmost ? HWND_TOPMOST : HWND_NOT_TOPMOST, rect.X, rect.Y, rect.Width, rect.Height, SWP_SHOWWINDOW);
+        return SetWindowPos(hWnd, MakeTopmost ? HWND_TOPMOST : HWND_NOT_TOPMOST, rect.X, rect.Y, rect.Width,
+            rect.Height, SWP_SHOWWINDOW);
     }
 
-    private string[] GetWindowTitles() {
+    private string[] GetWindowTitles()
+    {
         List<string> WindowList = new List<string>();
 
         Process[] ProcessArray = Process.GetProcesses();
-        foreach (Process p in ProcessArray) {
-            if (!IsNullOrWhitespace(p.MainWindowTitle)) {
+        foreach (Process p in ProcessArray)
+        {
+            if (!IsNullOrWhitespace(p.MainWindowTitle))
+            {
                 WindowList.Add(p.MainWindowTitle);
             }
         }
@@ -124,15 +136,21 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop> {
         return WindowList.ToArray();
     }
 
-    public bool IsNullOrWhitespace(string Str) {
-        if (Str.Equals("null")) {
+    public bool IsNullOrWhitespace(string Str)
+    {
+        if (Str.Equals("null"))
+        {
             return true;
         }
-        foreach (char c in Str) {
-            if (c != ' ') {
+
+        foreach (char c in Str)
+        {
+            if (c != ' ')
+            {
                 return false;
             }
         }
+
         return true;
     }
 }

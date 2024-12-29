@@ -9,6 +9,8 @@ public class CameraScaleSlider : MonoBehaviour
     private TMP_Text m_text;
     private ParticleSystem m_snow;
 
+    [SerializeField] private FloatRef m_floatRef;
+
     private void Awake()
     {
         m_slider = GetComponentInChildren<Slider>(true);
@@ -16,19 +18,14 @@ public class CameraScaleSlider : MonoBehaviour
         m_camera = Camera.main;
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);
         m_text = GetComponentInChildren<TMP_Text>(true);
-        m_slider.value = SettingManager.Instance.Setting.CameraScale;
+        m_slider.value = m_floatRef.Value;
         SetSliderValue(SettingManager.DEFAULT_CAMERA_SCALE);
-        SaveManager.Instance.OnLoad += OnSaveLoad;
     }
 
-    private void OnSaveLoad()
-    {
-        ValueChange(SettingManager.Instance.Setting.CameraScale);
-    }
 
     private void ValueChange(float a_value)
     {
-        SettingManager.Instance.Setting.CameraScale = a_value;
+        m_floatRef.Value = a_value;
         SetSliderValue(a_value);
     }
 

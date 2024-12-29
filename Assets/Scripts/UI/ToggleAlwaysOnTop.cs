@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class ToggleAlwaysOnTop : MonoBehaviour
 {
+    [SerializeField] private BoolRef m_value;
     private Toggle m_toggle;
 
     private void Awake()
@@ -20,8 +21,7 @@ public class ToggleAlwaysOnTop : MonoBehaviour
 
     private void OnChange(bool a_value)
     {
-        if (SettingManager.Instance.Setting.AlwaysOnTop == a_value) return;
-        AlwaysOnTop.Instance.ToggleAlwaysOnTop(a_value);
-        SettingManager.Instance.Setting.AlwaysOnTop = a_value;
+        if (m_value.Value == a_value) return;
+        m_value.Value = a_value;
     }
 }

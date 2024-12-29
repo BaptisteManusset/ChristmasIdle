@@ -52,7 +52,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         if (GetInstanceID() != _instance.GetInstanceID()) Destroy(gameObject);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         Destroyed = true;
         Instantiated = false;

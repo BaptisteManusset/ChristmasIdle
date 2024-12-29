@@ -4,23 +4,24 @@ using UnityEngine;
 [Serializable]
 public class Settings
 {
-    [SerializeField] private float m_cameraScale = 0;
-    [SerializeField] private float m_snowflakeScale = 0;
-    [SerializeField] private bool m_alwaysOnTop;
+    [SerializeField] private FloatRef m_snowFlakeScale;
+    [SerializeField] private FloatRef m_cameraScale;
+    [SerializeField] private BoolRef m_alwaysOnTop;
 
-    public float CameraScale
+
+    public FloatRef CameraScale
     {
         get => m_cameraScale;
         set => m_cameraScale = value;
     }
 
-    public float SnowflakeScale
+    public FloatRef SnowflakeScale
     {
-        get => m_snowflakeScale;
-        set => m_snowflakeScale = value;
+        get => m_snowFlakeScale;
+        set => m_snowFlakeScale = value;
     }
 
-    public bool AlwaysOnTop
+    public BoolRef AlwaysOnTop
     {
         get => m_alwaysOnTop;
         set => m_alwaysOnTop = value;

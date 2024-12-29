@@ -6,7 +6,7 @@ namespace Technical.VarRef
     [CreateAssetMenu(fileName = "VarRef", menuName = "VarRef/VarRef", order = 0)]
     public abstract class VarRef<T> : ScriptableObject
     {
-        private T m_value;
+       [SerializeField] private T m_value;
 
         public T Value
         {

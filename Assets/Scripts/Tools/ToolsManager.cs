@@ -44,8 +44,9 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.Enable();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         LeftDown.started -= OnLeftStarted;
         LeftDown.performed -= OnLeftPerformed;
         LeftDown.canceled -= OnLeftCanceled;
