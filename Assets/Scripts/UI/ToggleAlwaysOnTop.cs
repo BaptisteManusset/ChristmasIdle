@@ -8,18 +8,14 @@ public class ToggleAlwaysOnTop : MonoBehaviour
     private void Awake()
     {
         m_toggle = GetComponentInChildren<Toggle>(true);
-        m_toggle.isOn = true;
+        m_toggle.isOn = SettingManager.DEFAULT_ALWAYS_ON_TOP;
+        OnChange(SettingManager.DEFAULT_ALWAYS_ON_TOP);
         m_toggle.onValueChanged.AddListener(OnChange);
     }
 
     private void OnDestroy()
     {
         m_toggle.onValueChanged.RemoveListener(OnChange);
-    }
-
-    private void OnEnable()
-    {
-        m_toggle.isOn = SettingManager.Instance.Setting.AlwaysOnTop;
     }
 
     private void OnChange(bool a_value)

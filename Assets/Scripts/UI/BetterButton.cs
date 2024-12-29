@@ -10,8 +10,9 @@ public class BetterButton : Button
         m_feedback = GetComponent<ButtonFeedback>();
     }
 
-    public void Select()
+    public override void Select()
     {
+        base.Select();
         m_feedback.Select();
     }
 

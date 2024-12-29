@@ -7,8 +7,9 @@ public class SettingManager : Singleton<SettingManager>
 
     public Settings Setting => m_setting;
 
-    public const float CAMERA_SCALE = 10;
-    public const float SNOWFLAKE_SCALE = .01f;
+    public const float DEFAULT_CAMERA_SCALE = 10;
+    public const float DEFAULT_SNOWFLAKE_SCALE = .01f;
+    public const bool DEFAULT_ALWAYS_ON_TOP = true;
 
 
     public void SetSetting(Settings a_setting)

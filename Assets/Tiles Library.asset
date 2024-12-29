@@ -217,14 +217,6 @@ MonoBehaviour:
     TileBase: {fileID: 11400000, guid: c76019105b566e748b7db305c7e14a3f, type: 2}
   - Key: environment_129
     TileBase: {fileID: 11400000, guid: 8b6793b7f8082a0489f3e86109081823, type: 2}
-  - Key: environment_136
-    TileBase: {fileID: 11400000, guid: d9d899834266d65429f801e58fe59787, type: 2}
-  - Key: environment_137
-    TileBase: {fileID: 11400000, guid: ff43e846779d41b429564ecede19e34c, type: 2}
-  - Key: environment_138
-    TileBase: {fileID: 11400000, guid: 086abf6b423de0b47bd3b049b5a94eb7, type: 2}
-  - Key: environment_139
-    TileBase: {fileID: 11400000, guid: 8cddb891912879c4d850557fd5688cb5, type: 2}
   - Key: environment_144
     TileBase: {fileID: 11400000, guid: d21d8f496b59f3646a54140d9060460c, type: 2}
   - Key: environment_145

@@ -17,7 +17,7 @@ public class CameraScaleSlider : MonoBehaviour
         m_snow = m_camera.GetComponentInChildren<ParticleSystem>(true);
         m_text = GetComponentInChildren<TMP_Text>(true);
         m_slider.value = SettingManager.Instance.Setting.CameraScale;
-        SetSliderValue(SettingManager.CAMERA_SCALE);
+        SetSliderValue(SettingManager.DEFAULT_CAMERA_SCALE);
         SaveManager.Instance.OnLoad += OnSaveLoad;
     }
 
