@@ -11,8 +11,8 @@ public class SettingManager : Singleton<SettingManager>
     public const bool DEFAULT_ALWAYS_ON_TOP = true;
 
 
-    public void SetSetting(Settings a_setting)
+    public void SetSetting(SettingsSaved a_setting)
     {
-        m_setting = a_setting;
+        m_setting.SetValues(a_setting);
     }
 }

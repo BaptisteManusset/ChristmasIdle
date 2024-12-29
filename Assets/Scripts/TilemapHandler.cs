@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TilemapHandler : Singleton<TilemapHandler>
@@ -9,9 +8,7 @@ public class TilemapHandler : Singleton<TilemapHandler>
 
     [SerializeField] private GameObject UIParent;
     [SerializeField] private Tilemap menuMap;
-
-    [SerializeField] private TMP_Text m_currentTilemap;
-
+    
     public Tilemap TileMap => tileMap;
     protected override void Awake()
     {

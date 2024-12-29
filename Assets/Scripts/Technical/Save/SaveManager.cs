@@ -48,11 +48,7 @@ public class SaveManager : Singleton<SaveManager>
             TilemapHandler.Instance.TileMap.SetTile(pos, tile);
         }
 
-        SettingManager.Instance.SetSetting(new Settings
-        {
-            CameraScale = CurrentSave.Setting.CameraScale,
-            SnowflakeScale = CurrentSave.Setting.SnowflakeScale
-        });
+        SettingManager.Instance.SetSetting(CurrentSave.Setting);
         OnLoad?.Invoke();
     }
 

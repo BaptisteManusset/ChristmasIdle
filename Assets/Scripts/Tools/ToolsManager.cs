@@ -13,14 +13,11 @@ public class ToolsManager : Singleton<ToolsManager>
     [SerializeField] private InputAction RightDown = new();
 
 
-    [SerializeField] private TileBase currentTile;
+    [SerializeField] private TileRef currentTile;
 
     private Picker m_picker;
     private Placer m_placer;
     private Eraser m_eraser;
-
-    public event Action<TileBase> CurrentTileChanged;
-
 
     #region Awake
 
@@ -59,13 +56,7 @@ public class ToolsManager : Singleton<ToolsManager>
 
     public void SetCurrentTile(TileBase a_tile)
     {
-        currentTile = a_tile;
-        CurrentTileChanged?.Invoke(currentTile);
-    }
-
-    public TileBase GetCurrentTile()
-    {
-        return currentTile;
+        currentTile.Value = a_tile;
     }
 
     public void SetTool(Tool a_tool)

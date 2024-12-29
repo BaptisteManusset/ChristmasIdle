@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 public class Placer : Tool
 {
     private bool m_isPressed;
+    [SerializeField] private TileRef m_current;
 
     protected override void Awake()
     {
@@ -23,7 +25,6 @@ public class Placer : Tool
             return;
         }
 
-        TileBase tile = ToolsManager.Instance.GetCurrentTile();
 
         Tilemap tilemap = TilemapHandler.Instance.GetCurrentTilemap();
         CursorBackgroundHandler.Instance.SetPosition(tilemap.layoutGrid.GetMousePosition());
@@ -32,18 +33,18 @@ public class Placer : Tool
 
         Vector3Int tilePos = tilemap.layoutGrid.GetMousePosition();
 
-        if (tile.GetType() == typeof(MobTile))
+        if (m_current.Value.GetType() == typeof(MobTile))
         {
             if (!tilemap.GetTile(tilePos))
             {
-                tilemap.SetTile(tilePos, tile);
+                tilemap.SetTile(tilePos, m_current.Value);
             }
 
             m_isPressed = false;
         }
         else
         {
-            tilemap.SetTile(tilePos, tile);
+            tilemap.SetTile(tilePos, m_current.Value);
         }
     }
 

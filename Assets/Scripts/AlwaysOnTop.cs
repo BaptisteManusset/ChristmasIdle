@@ -94,17 +94,17 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop>
 
     private void Start()
     {
-        m_value.valueChanged += OnValueChange;
+        m_value.ValueChanged += OnValueChange;
     }
 
     protected override void OnDestroy()
     {
-        m_value.valueChanged -= OnValueChange;
+        m_value.ValueChanged -= OnValueChange;
     }
 
-    private void OnValueChange(bool a_value)
+    private void OnValueChange()
     {
-        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, a_value);
+        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, m_value.Value);
     }
 
     public bool AssignTopmostWindow(string WindowTitle, bool MakeTopmost)

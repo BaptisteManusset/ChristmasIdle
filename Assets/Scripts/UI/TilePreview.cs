@@ -9,22 +9,22 @@ public class TilePreview : MonoBehaviour
     [SerializeField] private Image m_preview;
     [SerializeField] private TMP_Text m_label;
 
+    [SerializeField] private TileRef m_tileRef;
 
     private void OnEnable()
     {
-        ToolsManager.Instance.CurrentTileChanged += CurrentTileChanged;
-        CurrentTileChanged(ToolsManager.Instance.GetCurrentTile());
+        m_tileRef.ValueChanged += CurrentTileChanged;
     }
 
     private void OnDisable()
     {
-        ToolsManager.Instance.CurrentTileChanged -= CurrentTileChanged;
+        m_tileRef.ValueChanged -= CurrentTileChanged;
     }
 
-    private void CurrentTileChanged(TileBase a_tile)
+    private void CurrentTileChanged()
     {
-        m_preview.enabled = a_tile != null;
-        m_preview.sprite = a_tile.GetTilePreview();
-        m_label.text = a_tile.name;
+        m_preview.enabled = m_tileRef != null;
+        m_preview.sprite = m_tileRef.Value.GetTilePreview();
+        m_label.text = m_tileRef.Value.name;
     }
 }

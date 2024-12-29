@@ -676,6 +676,7 @@ GameObject:
   - component: {fileID: 1488872489285908318}
   - component: {fileID: 9025980438457408945}
   - component: {fileID: 5718633090755240653}
+  - component: {fileID: 6292252585373204474}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -799,6 +800,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6292252585373204474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492223424979172169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca333ebb527946a4b3c5314b428d794a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_prefix: 'SnowFlake Scale '
+  m_suffix: 
+  m_ref: {fileID: 11400000, guid: ad103ead62695cb4493000fc46c92226, type: 2}
 --- !u!1 &4938736518138977545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1022,7 @@ GameObject:
   - component: {fileID: 4314427725188269112}
   - component: {fileID: 5060751524051757332}
   - component: {fileID: 8353372890387824227}
+  - component: {fileID: 8620104992506895589}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1129,6 +1146,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8620104992506895589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438578903952558707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca333ebb527946a4b3c5314b428d794a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_prefix: Camera Scale
+  m_suffix: 
+  m_ref: {fileID: 11400000, guid: 4dde41167d2f5ca40b2b8d3da7eb1c49, type: 2}
 --- !u!1 &6057494514426426807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,8 +1595,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828994822103949519}
-  - component: {fileID: 7104794443662533448}
   - component: {fileID: 584844433260147695}
+  - component: {fileID: 3126295428540090066}
   m_Layer: 5
   m_Name: Snowflake Scale
   m_TagString: Untagged
@@ -1593,19 +1625,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &7104794443662533448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543843670163003489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8da9936421f402189846c80f7333e31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_floatRef: {fileID: 11400000, guid: ad103ead62695cb4493000fc46c92226, type: 2}
 --- !u!222 &584844433260147695
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1614,6 +1633,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8543843670163003489}
   m_CullTransparentMesh: 1
+--- !u!114 &3126295428540090066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543843670163003489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f397d40d4de643a1968d7f5fcbd81f21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_value: {fileID: 11400000, guid: ad103ead62695cb4493000fc46c92226, type: 2}
+  m_text: Snowflake Scale
 --- !u!1001 &243431908310348353
 PrefabInstance:
   m_ObjectHideFlags: 0

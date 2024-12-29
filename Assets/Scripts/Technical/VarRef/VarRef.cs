@@ -3,10 +3,21 @@ using UnityEngine;
 
 namespace Technical.VarRef
 {
-    [CreateAssetMenu(fileName = "VarRef", menuName = "VarRef/VarRef", order = 0)]
-    public abstract class VarRef<T> : ScriptableObject
+
+    public abstract class VarRef : ScriptableObject
     {
-       [SerializeField] private T m_value;
+        public virtual event Action ValueChanged;
+
+        protected void CallEvent()
+        {
+            ValueChanged?.Invoke();
+        }
+
+    }
+    public class VarRef<T> : VarRef
+
+    {
+        [SerializeField] private T m_value;
 
         public T Value
         {
@@ -14,13 +25,8 @@ namespace Technical.VarRef
             set
             {
                 m_value = value;
-                valueChanged?.Invoke(m_value);
+                CallEvent();
             }
         }
-
-        public event Action<T> valueChanged;
-
-
- 
     }
 }
