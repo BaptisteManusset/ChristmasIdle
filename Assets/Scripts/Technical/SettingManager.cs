@@ -5,6 +5,10 @@ public class SettingManager : Singleton<SettingManager>
 {
     [SerializeField] private Settings m_setting;
 
+    [SerializeField] private FloatRef m_snowFlakeScale;
+    [SerializeField] private FloatRef m_cameraScale;
+    [SerializeField] private BoolRef m_alwaysOnTop;
+    
     public Settings Setting => m_setting;
 
     public const float DEFAULT_CAMERA_SCALE = 10;

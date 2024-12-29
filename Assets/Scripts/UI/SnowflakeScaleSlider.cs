@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SnowflakeScaleSlider : MonoBehaviour
 {
+    [SerializeField] private FloatRef m_floatRef;
     private Slider m_slider;
     private Camera m_camera;
     private TMP_Text m_text;
@@ -26,7 +27,9 @@ public class SnowflakeScaleSlider : MonoBehaviour
 
     private void OnValueChanged(float a_value)
     {
-        SettingManager.Instance.Setting.SnowflakeScale = a_value;
+        m_floatRef.Value = a_value;
+        
+        // SettingManager.Instance.Setting.SnowflakeScale = a_value;
         SetSliderValue(a_value);
     }
 
