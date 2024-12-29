@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public abstract class StateController : Singleton<StateController>
+﻿public abstract class StateController : Singleton<StateController>
 {
     private GameState m_currentState;
 
@@ -11,9 +9,8 @@ public abstract class StateController : Singleton<StateController>
         if (m_currentState) m_currentState.UpdateState();
     }
 
-    public void ChangeState(GameState a_newState)
+    public virtual void ChangeState(GameState a_newState)
     {
-        Debug.Log("new state: " + a_newState.State);
         if (m_currentState) m_currentState.OnExit();
         m_currentState = a_newState;
         if (m_currentState) m_currentState.OnEnter();

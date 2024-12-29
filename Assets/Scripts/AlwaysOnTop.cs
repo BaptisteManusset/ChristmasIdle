@@ -1,15 +1,12 @@
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 
-using UnityEngine;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
-public class AlwaysOnTop : MonoBehaviour {
+public class AlwaysOnTop : Singleton<AlwaysOnTop> {
     #region WIN32API
 
     public static readonly System.IntPtr HWND_TOPMOST = new System.IntPtr(-1);
@@ -93,12 +90,18 @@ public class AlwaysOnTop : MonoBehaviour {
 
 
     // Use this for initialization
-    private void Start() {
-        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, true);
+    private void Start()
+    {
+        ToggleAlwaysOnTop();
+    }
+
+    public void ToggleAlwaysOnTop(bool a_alwaysOnTop = true)
+    {
+        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, a_alwaysOnTop);
     }
 
     public bool AssignTopmostWindow(string WindowTitle, bool MakeTopmost) {
-        UnityEngine.Debug.Log("Assigning top most flag to window of title: " + WindowTitle);
+        UnityEngine.Debug.Log($"Assigning top most flg: {MakeTopmost} to window of title: {WindowTitle}");
 
         System.IntPtr hWnd = FindWindow((string)null, WindowTitle);
 

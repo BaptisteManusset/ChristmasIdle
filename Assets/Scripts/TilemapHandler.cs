@@ -4,19 +4,34 @@ using UnityEngine.Tilemaps;
 
 public class TilemapHandler : Singleton<TilemapHandler>
 {
+    [SerializeField] private GameObject WorldParent;
     [SerializeField] private Tilemap tileMap;
+
+    [SerializeField] private GameObject UIParent;
     [SerializeField] private Tilemap menuMap;
+
     [SerializeField] private TMP_Text m_currentTilemap;
 
-    public Tilemap GetTilemap()
+    public Tilemap TileMap => tileMap;
+    protected override void Awake()
     {
-        if (GameStateController.Instance.Current.State == EGameState.Menu)
-        {
-            Debug.Log("menu map");
-            return menuMap;
-        }
+        base.Awake();
+        UIParent.SetActive(false);
+    }
 
-        Debug.Log("world map");
-        return tileMap;
+    public Tilemap GetCurrentTilemap()
+    {
+        return GameStateController.Instance.Current.State == EGameState.Menu ? menuMap : tileMap;
+    }
+
+    public void SwitchTilemap(bool a_showMenu)
+    {
+        UIParent.gameObject.SetActive(a_showMenu);
+        WorldParent.gameObject.SetActive(!a_showMenu);
+    }
+
+    public bool IsWorldTilemap(ITilemap a_tilemapToTest)
+    {
+        return tileMap == a_tilemapToTest.GetComponent<Tilemap>();
     }
 }

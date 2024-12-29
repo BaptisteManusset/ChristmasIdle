@@ -1,15 +1,13 @@
-using System.Collections.Generic;
-using TMPro;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class ToolsManager : Singleton<ToolsManager>
 {
-    private List<Tool> m_tools = new();
+    [SerializeField] Tool current;
 
-    public Tool current;
-
+    public Tool CurrentTool => current;
 
     [SerializeField] private InputAction LeftDown = new();
     [SerializeField] private InputAction RightDown = new();
@@ -17,37 +15,11 @@ public class ToolsManager : Singleton<ToolsManager>
 
     [SerializeField] private TileBase currentTile;
 
-    [SerializeField] private TMP_Text m_currentTilemap;
-    [SerializeField] private TMP_Text m_currentTool;
+    private Picker m_picker;
+    private Placer m_placer;
+    private Eraser m_eraser;
 
-
-    [SerializeField] private Picker m_picker;
-    [SerializeField] private Placer m_placer;
-    [SerializeField] private Eraser m_eraser;
-
-    public void SetCurrentTilemap(TileBase a_tile)
-    {
-        currentTile = a_tile;
-        m_currentTilemap.text = currentTile.GetType().Name;
-    }
-
-    public TileBase GetCurrentTilemap()
-    {
-        return currentTile;
-    }
-
-    public void SetCurrentTool(Tool a_tool)
-    {
-        if (current) current.OnDeselect();
-        current = a_tool;
-        if (current) current.OnSelect();
-
-        m_currentTool.text = current.name;
-    }
-
-    public void SetEraser() => SetCurrentTool(m_eraser);
-    public void SetPlacer() => SetCurrentTool(m_placer);
-    public void SetPicker() => SetCurrentTool(m_picker);
+    public event Action<TileBase> CurrentTileChanged;
 
 
     #region Awake
@@ -57,8 +29,8 @@ public class ToolsManager : Singleton<ToolsManager>
         m_eraser = GetComponent<Eraser>();
         m_placer = GetComponent<Placer>();
         m_picker = GetComponent<Picker>();
+
         base.Awake();
-        m_tools.AddRange(GetComponents<Tool>());
 
         LeftDown.Enable();
         LeftDown.started += OnLeftStarted;
@@ -67,6 +39,9 @@ public class ToolsManager : Singleton<ToolsManager>
         RightDown.started += OnRightStarted;
         RightDown.performed += OnRightPerformed;
         RightDown.canceled += OnRightCanceled;
+
+        LeftDown.Enable();
+        RightDown.Enable();
     }
 
     private void OnDestroy()
@@ -81,6 +56,29 @@ public class ToolsManager : Singleton<ToolsManager>
 
     #endregion
 
+    public void SetCurrentTile(TileBase a_tile)
+    {
+        currentTile = a_tile;
+        CurrentTileChanged?.Invoke(currentTile);
+    }
+
+    public TileBase GetCurrentTile()
+    {
+        return currentTile;
+    }
+
+    public void SetTool(Tool a_tool)
+    {
+        if (current) current.OnDeselect();
+
+        current = a_tool;
+        if (!current) return;
+        current.OnSelect();
+    }
+
+    public void SetEraser() => SetTool(m_eraser);
+    public void SetPlacer() => SetTool(m_placer);
+    public void SetPicker() => SetTool(m_picker);
 
     #region events
 

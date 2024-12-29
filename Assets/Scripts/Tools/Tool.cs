@@ -1,8 +1,21 @@
-using System.Reflection;
 using UnityEngine;
 
 public abstract class Tool : MonoBehaviour
 {
+    [SerializeField] protected BetterButton m_button;
+
+    public BetterButton Button => m_button;
+
+    protected virtual void Awake()
+    {
+        if (m_button) m_button.onClick.AddListener(OnButtonClick);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (m_button) m_button.onClick.RemoveListener(OnButtonClick);
+    }
+
     public virtual void OnLeftCanceled()
     {
     }
@@ -29,11 +42,19 @@ public abstract class Tool : MonoBehaviour
 
     public virtual void OnSelect()
     {
-        Debug.Log($"<b>{GetType().Name}:{MethodBase.GetCurrentMethod()?.Name}</b>", this);
+        if (m_button) m_button.Select();
     }
 
     public virtual void OnDeselect()
     {
-        Debug.Log($"<b>{GetType().Name}:{MethodBase.GetCurrentMethod()?.Name}</b>", this);
+        if (m_button) m_button.Deselect();
+    }
+
+    protected virtual void OnButtonClick()
+    {
+        ToolsManager.Instance.SetTool(this);
+        if (m_button)
+        {
+        }
     }
 }
