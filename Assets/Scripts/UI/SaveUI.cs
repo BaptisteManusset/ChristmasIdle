@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class SaveUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text m_label;
     [SerializeField] private Button m_save;
     [SerializeField] private Button m_load;
+    private Image m_loading;
 
 
     private void Awake()
