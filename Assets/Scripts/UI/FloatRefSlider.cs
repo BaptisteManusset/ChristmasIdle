@@ -1,32 +1,33 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class FloatRefSlider : MonoBehaviour
 {
-    [SerializeField] private FloatRef m_value;
+
+    [FormerlySerializedAs("m_value")] [SerializeField] private FloatContainer m_data;
     private Slider m_slider;
 
     private void Awake()
     {
         m_slider = GetComponentInChildren<Slider>(true);
         m_slider.onValueChanged.AddListener(SliderChange);
-        m_value.ValueChanged += ValueChanged;
+        m_data.ValueChanged += MDataChanged;
     }
 
 
     private void OnDestroy()
     {
         m_slider.onValueChanged.RemoveListener(SliderChange);
-        m_value.ValueChanged -= ValueChanged;
+        m_data.ValueChanged -= MDataChanged;
     }
-    private void ValueChanged()
+    private void MDataChanged()
     {
-        m_slider.value = m_value.Value;
+        m_slider.value = m_data.Value;
     }
 
     private void SliderChange(float a_float)
     {
-        m_value.Value = a_float;
+        m_data.Value = a_float;
     }
 }

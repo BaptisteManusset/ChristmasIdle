@@ -1170,7 +1170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3579795305048953191}
-  - component: {fileID: 1735856508033197411}
+  - component: {fileID: 6622465167424914001}
   m_Layer: 5
   m_Name: Camera Scale
   m_TagString: Untagged
@@ -1199,7 +1199,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1735856508033197411
+--- !u!114 &6622465167424914001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1208,10 +1208,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6057494514426426807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a0ba5b949143cb8469ca0f8ef3e2e1, type: 3}
+  m_Script: {fileID: 11500000, guid: f397d40d4de643a1968d7f5fcbd81f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_floatRef: {fileID: 11400000, guid: 4dde41167d2f5ca40b2b8d3da7eb1c49, type: 2}
+  m_value:
+    m_state: 1
+    m_varValue: 0
+    m_varRef: {fileID: 0}
 --- !u!1 &6249433616211756852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,8 +1648,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f397d40d4de643a1968d7f5fcbd81f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_value: {fileID: 11400000, guid: ad103ead62695cb4493000fc46c92226, type: 2}
-  m_text: Snowflake Scale
+  m_value:
+    m_state: 1
+    m_varValue: 0
+    m_varRef: {fileID: 0}
 --- !u!1001 &243431908310348353
 PrefabInstance:
   m_ObjectHideFlags: 0
