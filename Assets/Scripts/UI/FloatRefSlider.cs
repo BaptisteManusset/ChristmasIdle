@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class FloatRefSlider : MonoBehaviour
 {
 
-    [FormerlySerializedAs("m_value")] [SerializeField] private FloatContainer m_data;
+    [SerializeField] private FloatRef m_data;
     private Slider m_slider;
 
     private void Awake()

@@ -1,93 +1,60 @@
-﻿using System;
-using UnityEditor;
-using UnityEditor.IMGUI.Controls;
+﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Technical.VarRef.Editor
 {
     [CustomPropertyDrawer(typeof(VarContainer), true)]
-    public class VarContainerDrawer : PropertyDrawer
+    public class VarContainerDrawer<T> : PropertyDrawer
     {
-        SerializedProperty state;
-        SerializedProperty value;
-        SerializedProperty reference;
-        private AdvancedStringOptionsDropdown m_dropdown;
+        private SerializedProperty m_state;
+        private SerializedProperty m_value;
+        private SerializedProperty m_reference;
+        private int m_selected = 0;
+        private readonly string[] m_options = new string[2] { "Value", "Ref" };
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        public override void OnGUI(Rect a_position, SerializedProperty a_property, GUIContent a_label)
         {
-            state = property.FindPropertyRelative("m_state");
-            value = property.FindPropertyRelative("m_varValue");
-            reference = property.FindPropertyRelative("m_varRef");
-
-            if (m_dropdown == null)
-            {
-                m_dropdown = new AdvancedStringOptionsDropdown(state.enumDisplayNames);
-                m_dropdown.OnOptionSelected += OnMDropdownOptionSelected;
-            }
-
-            EditorGUI.BeginProperty(position, label, property);
+            m_state = a_property.FindPropertyRelative("m_state");
+            m_value = a_property.FindPropertyRelative("m_varValue");
+            m_reference = a_property.FindPropertyRelative("m_varRef");
+            EditorGUI.BeginProperty(a_position, a_label, a_property);
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                GUILayout.Label(label);
-                if (GUILayout.Button(":", GUILayout.Width(10)))
+                GUILayout.Label(a_label);
+                m_state.enumValueIndex =
+                    EditorGUILayout.Popup("", m_state.enumValueIndex, m_options, GUILayout.Width(60));
+                switch ((VarContainer.VarEnum)m_state.enumValueIndex)
                 {
-                    m_dropdown.Show(position);
-                }
-                
-                switch ((VarContainer.VarEnum)state.enumValueIndex)
-                {
+                    default:
                     case VarContainer.VarEnum.Value:
-                        EditorGUILayout.PropertyField(value);
+                        EditorGUILayout.PropertyField(m_value, new GUIContent());
                         break;
                     case VarContainer.VarEnum.Ref:
-                        EditorGUILayout.PropertyField(reference);
+                        Object varRef = EditorGUILayout.ObjectField(m_reference.objectReferenceValue,
+                            typeof(T),
+                            false);
+                        m_reference.objectReferenceValue = varRef;
                         break;
                 }
-                
             }
-
 
             EditorGUI.EndProperty();
         }
-
-        private void OnMDropdownOptionSelected(int index)
-        {
-            state.enumValueIndex = index;
-            state.serializedObject.ApplyModifiedProperties();
-        }
     }
 
-    public class AdvancedStringOptionsDropdown : AdvancedDropdown
+    [CustomPropertyDrawer(typeof(FloatContainer), true)]
+    class FloatContainerDrawer : VarContainerDrawer<FloatRef>
     {
-        private string[] _enumNames;
+    }
 
-        public event Action<int> OnOptionSelected;
+    [CustomPropertyDrawer(typeof(BoolContainer), true)]
+    class BoolContainerDrawer : VarContainerDrawer<BoolRef>
+    {
+    }
 
-        public AdvancedStringOptionsDropdown(string[] stringOptions) : base(new AdvancedDropdownState())
-        {
-            _enumNames = stringOptions;
-        }
-
-        protected override void ItemSelected(AdvancedDropdownItem item)
-        {
-            OnOptionSelected?.Invoke(item.id);
-        }
-
-        protected override AdvancedDropdownItem BuildRoot()
-        {
-            var root = new AdvancedDropdownItem("");
-
-            for (int i = 0; i < _enumNames.Length; i++)
-            {
-                var item = new AdvancedDropdownItem(_enumNames[i]);
-                item.id = i;
-
-                root.AddChild(item);
-            }
-
-            return root;
-        }
+    [CustomPropertyDrawer(typeof(TileContainer), true)]
+    class TileContainerDrawer : VarContainerDrawer<TileRef>
+    {
     }
 }

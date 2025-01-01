@@ -10,10 +10,12 @@ public class TilemapHandler : Singleton<TilemapHandler>
     [SerializeField] private Tilemap menuMap;
     
     public Tilemap TileMap => tileMap;
+
     protected override void Awake()
     {
         base.Awake();
         UIParent.SetActive(false);
+        WorldParent.SetActive(true);
     }
 
     public Tilemap GetCurrentTilemap()
@@ -23,8 +25,8 @@ public class TilemapHandler : Singleton<TilemapHandler>
 
     public void SwitchTilemap(bool a_showMenu)
     {
-        UIParent.gameObject.SetActive(a_showMenu);
-        WorldParent.gameObject.SetActive(!a_showMenu);
+        UIParent.SetActive(a_showMenu);
+        WorldParent.SetActive(!a_showMenu);
     }
 
     public bool IsWorldTilemap(ITilemap a_tilemapToTest)

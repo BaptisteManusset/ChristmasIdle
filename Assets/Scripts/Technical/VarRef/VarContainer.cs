@@ -2,6 +2,7 @@
 using Technical.VarRef;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Object = UnityEngine.Object;
 
 [Serializable]
 public class VarContainer
@@ -29,17 +30,35 @@ public class VarContainer<T> : VarContainer
     [SerializeField] private VarRef<T> m_varRef;
 
 
-    public VarEnum state => m_state;
+    public VarEnum State => m_state;
+
+    public override event Action ValueChanged
+    {
+        add
+        {
+            if (!m_varRef) return;
+            m_varRef.ValueChanged += value;
+        }
+        remove
+        {
+            if (!m_varRef) return;
+            m_varRef.ValueChanged -= value;
+        }
+    }
 
     public T Value
     {
         get
         {
-            return m_state switch
+            switch (m_state)
             {
-                VarEnum.Value => m_varValue,
-                VarEnum.Ref => m_varRef.Value,
-            };
+                case VarEnum.Value:
+                    return m_varValue;
+                case VarEnum.Ref:
+                    return m_varRef.Value;
+                default:
+                    return m_varValue;
+            }
         }
         set
         {
@@ -50,6 +69,9 @@ public class VarContainer<T> : VarContainer
                     break;
                 case VarEnum.Ref:
                     m_varRef.Value = value;
+                    break;
+                default:
+                    m_varValue = value;
                     break;
             }
 

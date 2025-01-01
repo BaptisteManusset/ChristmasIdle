@@ -13,6 +13,7 @@ public class TilePreview : MonoBehaviour
     private void OnEnable()
     {
         m_tileRef.ValueChanged += CurrentTileChanged;
+        CurrentTileChanged();
     }
 
     private void OnDisable()
@@ -22,7 +23,13 @@ public class TilePreview : MonoBehaviour
 
     private void CurrentTileChanged()
     {
-        m_preview.enabled = m_tileRef != null;
+        if (m_tileRef == null)
+        {
+            m_preview.sprite = null;
+            m_label.text = "";
+            return;
+        }
+
         m_preview.sprite = m_tileRef.Value.GetTilePreview();
         m_label.text = m_tileRef.Value.name;
     }
