@@ -12,7 +12,7 @@ public class ToggleAlwaysOnTop : MonoBehaviour
         m_toggle.isOn = SettingManager.DEFAULT_ALWAYS_ON_TOP;
         OnChange(SettingManager.DEFAULT_ALWAYS_ON_TOP);
         m_toggle.onValueChanged.AddListener(OnChange);
-        
+
         SaveManager.Instance.OnLoad += OnLoad;
     }
 
@@ -24,7 +24,7 @@ public class ToggleAlwaysOnTop : MonoBehaviour
     private void OnDestroy()
     {
         m_toggle.onValueChanged.RemoveListener(OnChange);
-        SaveManager.Instance.OnLoad -= OnLoad;
+        if (SaveManager.Instance) SaveManager.Instance.OnLoad -= OnLoad;
     }
 
     private void OnChange(bool a_value)
