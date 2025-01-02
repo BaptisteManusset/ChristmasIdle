@@ -95,6 +95,8 @@ public class AlwaysOnTop : Singleton<AlwaysOnTop>
     private void Start()
     {
         m_value.ValueChanged += OnValueChange;
+        m_value.Value = true;
+        AssignTopmostWindow(System.Diagnostics.Process.GetCurrentProcess().ProcessName, m_value.Value );
     }
 
     protected override void OnDestroy()
