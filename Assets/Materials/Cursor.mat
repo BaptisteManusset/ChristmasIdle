@@ -57,3 +57,4 @@ Material:
     - _Color2: {r: 0.05933038, g: 0.0240299, b: 0.33962262, a: 0}
     - _Color_Background: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
