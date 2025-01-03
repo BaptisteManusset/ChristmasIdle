@@ -9,6 +9,7 @@ public class Picker : Tool
         TileBase tileBase = TilemapHandler.Instance.GetCurrentTilemap().GetTileFromMousePosition();
         if (tileBase == null) return;
         ToolsManager.Instance.SetCurrentTile(tileBase);
+        AudioHandler.Instance.ClickSound();
         if (GameStateController.Instance.Current.State == EGameState.EditState)
         {
             ToolsManager.Instance.SetPlacer();

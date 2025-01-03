@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -9,7 +8,6 @@ public class ClearAllButton : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image m_loader;
     [SerializeField] private float m_duration = 1;
     private float m_progress;
-    private bool m_pressed;
 
     private void Awake()
     {
@@ -23,7 +21,6 @@ public class ClearAllButton : MonoBehaviour, IPointerDownHandler
         {
             m_progress -= Time.deltaTime;
             TilemapHandler.Instance.TileMap.ClearAllTiles();
-            m_pressed = false;
         }
 
         m_loader.fillAmount = 1 - m_progress / m_duration;

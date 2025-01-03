@@ -46,6 +46,7 @@ public class ButtonFeedback : MonoBehaviour
     public void Select()
     {
         m_betterButton.image.sprite = m_selectSprite;
+        AudioHandler.Instance.ClickSound();
     }
 
     public void Deselect()
